@@ -12,3 +12,5 @@ So basicly this is my Woahwo idea, nothing more.
 Future me, I know how much you LOVE javascript, BUT I suggest that you don't do that shit in javascript.
 
 <!-- 28/4/2023 -->
+
+Look, the player NEEDS TO BE A DUCK.
