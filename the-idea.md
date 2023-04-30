@@ -13,4 +13,4 @@ Future me, I know how much you LOVE javascript, BUT I suggest that you don't do 
 
 <!-- 28/4/2023 -->
 
-Look, the player NEEDS TO BE A DUCK. <!-- The cs50 Duck (: -->
+Look, the player NEEDS TO BE A DUCK. <!-- The cs50 Duck (: --> Or not ):

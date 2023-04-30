@@ -9,6 +9,7 @@ pygame.display.set_caption("Cats")
 clock = pygame.time.Clock()
 running = True
 
+playerSkin = pygame.image.load("src/images/player.png")
 playerPOS = pygame.Vector2(WIDTH / 2, HEIGHT / 2)
 playerSpeed = 3
 
@@ -17,7 +18,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     screen.fill("blue")
-    pygame.draw.circle(screen, "red", playerPOS, 40)
+    screen.blit(playerSkin, playerPOS)
 
     playerMovments(pygame, playerPOS, playerSpeed)
 
