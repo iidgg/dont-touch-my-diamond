@@ -6,8 +6,6 @@ def playerMovments(pygame, playerPOS, playerSpeed, WIDTH, HEIGHT):
         playerPOS.x = 0
     elif playerPOS.x >= WIDTH - 10:
         playerPOS.x = WIDTH - 10
-
-    print(playerPOS.y)
     
     if playerPOS.y < 0:
         playerPOS.y = 0
