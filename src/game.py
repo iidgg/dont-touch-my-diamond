@@ -16,13 +16,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    screen.fill("purple")
+    screen.fill("blue")
     pygame.draw.circle(screen, "red", playerPOS, 40)
 
     playerMovments(pygame, playerPOS, playerSpeed)
 
-    pygame.display.flip()
-
+    pygame.display.flip() # Flip to next frame
     clock.tick(60)
 
 pygame.quit()
