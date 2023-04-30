@@ -13,6 +13,11 @@ playerSkin = pygame.image.load("src/images/woodcutter/index.png") # Load the pla
 playerPOS = oldPlayerPOS = pygame.Vector2(WIDTH / 2, HEIGHT / 2) # Create a variable to store the player's position.
 playerSpeed = 3 # Create a variable to store the player's speed.
 
+playerWidth = playerSkin.get_width()
+playerHeight = playerSkin.get_height()
+
+print(playerWidth , "  ", playerHeight)
+
 while running:
     # Get all events that happened since the last frame.
     for event in pygame.event.get():
