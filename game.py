@@ -1,5 +1,6 @@
 import pygame
 
+pygame.init()
 WIDTH, HEIGHT = 1080, 720
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Cats")
@@ -12,5 +13,8 @@ while running:
             running = False
 
     screen.fill("purple")
+    pygame.display.flip()
 
     clock.tick(60)
+
+pygame.quit()
