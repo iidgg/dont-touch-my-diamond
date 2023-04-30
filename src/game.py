@@ -29,5 +29,4 @@ while running:
     pygame.display.flip() # Flip to next frame
     clock.tick(60) # Wait for 1/60th of a second.
 
-# Quit Pygame.
-pygame.quit()
+pygame.quit() # Quit Pygame.
