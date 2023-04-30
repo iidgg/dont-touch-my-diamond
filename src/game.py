@@ -24,7 +24,7 @@ while running:
     screen.blit(playerSkin, playerPOS) # Draw the player on the screen.
 
     oldPlayerPOS = playerPOS
-    playerMovments(pygame, playerPOS, playerSpeed)
+    playerMovments(pygame, playerPOS, playerSpeed, WIDTH, HEIGHT)
 
     pygame.display.flip() # Flip to next frame
     clock.tick(60) # Wait for 1/60th of a second.
