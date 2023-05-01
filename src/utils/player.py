@@ -12,7 +12,8 @@ class Player:
         self.playerWidth = self.playerSkin.get_width()
         self.playerHeight = self.playerSkin.get_height()
 
-        
+        self.playerSurface = self.playerSkin
+
         self.playerPOS = self.playerOldPOS = pygame.Vector2(WIDTH / 2, HEIGHT / 2) # Create a variable to store the player's position.
 
         self.walkingFrame = 0
@@ -47,18 +48,11 @@ class Player:
         self.movePlayer()
 
         if self.walkingFrame % 1 == 0:
-            subsurface = self.playerSkin.subsurface((self.walkingFrame * 48, 0, 48, 48))
+            self.playerSurface = self.playerWalkingSkin.subsurface((self.walkingFrame * 48, 0, 48, 48))
 
-        return subsurface
+        if self.walkingFrame >= (6 - 0.1):
+            self.walkingFrame = 0
+        else:
+            self.walkingFrame = round(self.walkingFrame + 0.1, 2)
 
-    # if walkingFrame % 1 == 0:
-    #     subsurface = playerSkin.subsurface((walkingFrame * 48, 0, 48, 48))
-
-    # screen.blit(subsurface, playerPOS)
-    # if walkingFrame >= (6 - 0.1):
-    #     walkingFrame = 0
-    # else:
-    #     walkingFrame = round(walkingFrame + 0.1, 2)
-    
-    # oldPlayerPOS = playerPOS
-    # playerMovments(pygame, playerPOS, playerSpeed, WIDTH, HEIGHT, playerWidth, playerHeight)
+        return self.playerSurface
