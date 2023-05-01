@@ -1,9 +1,9 @@
 import pygame
+from constants import *
 from utils.movements.player import playerMovments # Define a function to move the player.
 
 
 pygame.init() # Initialize Pygame.
-WIDTH, HEIGHT = 1080, 720 # Define the screen size.
 screen = pygame.display.set_mode((WIDTH, HEIGHT)) # Create the screen.
 pygame.display.set_caption("Don't touch my diamons!") # Set the window title.
 clock = pygame.time.Clock() # Create a clock object.

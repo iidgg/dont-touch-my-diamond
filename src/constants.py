@@ -1,0 +1,1 @@
+WIDTH, HEIGHT = 1080, 720 # Define the screen size.
