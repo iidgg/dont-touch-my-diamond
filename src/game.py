@@ -16,8 +16,6 @@ playerSpeed = 3 # Create a variable to store the player's speed.
 playerWidth = playerSkin.get_width()
 playerHeight = playerSkin.get_height()
 
-print(playerWidth , "  ", playerHeight)
-
 while running:
     # Get all events that happened since the last frame.
     for event in pygame.event.get():
@@ -29,7 +27,7 @@ while running:
     screen.blit(playerSkin, playerPOS) # Draw the player on the screen.
 
     oldPlayerPOS = playerPOS
-    playerMovments(pygame, playerPOS, playerSpeed, WIDTH, HEIGHT)
+    playerMovments(pygame, playerPOS, playerSpeed, WIDTH, HEIGHT, playerWidth, playerHeight)
 
     pygame.display.flip() # Flip to next frame
     clock.tick(60) # Wait for 1/60th of a second.
