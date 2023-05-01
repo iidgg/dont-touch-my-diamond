@@ -6,7 +6,7 @@ class Player:
         self.x = x
         self.y = y
 
-        self.playerSkin = pygame.image.load("src/images/woodcutter/index.png")
+        self.playerSkin = pygame.image.load("src/images/woodcutter/index/right.png")
         self.playerWalkingSkin = pygame.image.load("src/images/woodcutter/walk/right.png")
 
         self.playerWidth = self.playerSkin.get_width()
