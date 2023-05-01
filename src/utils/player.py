@@ -6,8 +6,12 @@ class Player:
         self.x = x
         self.y = y
 
-        self.playerSkin = pygame.image.load("src/images/woodcutter/index/right.png")
-        self.playerWalkingSkin = pygame.image.load("src/images/woodcutter/walk/right.png")
+        self.playerDirection = "right"
+        self.playerSpeed = speed
+
+
+        self.playerSkin = pygame.image.load(f"src/images/woodcutter/index/{self.playerDirection}.png")
+        self.playerWalkingSkin = pygame.image.load(f"src/images/woodcutter/walk/{self.playerDirection}.png")
 
         self.playerWidth = self.playerSkin.get_width()
         self.playerHeight = self.playerSkin.get_height()
@@ -17,8 +21,6 @@ class Player:
         self.playerPOS = self.playerOldPOS = pygame.Vector2(WIDTH / 2, HEIGHT / 2) # Create a variable to store the player's position.
 
         self.walkingFrame = 0
-
-        self.playerSpeed = speed
 
     def movePlayer(self):
         keys = pygame.key.get_pressed()
