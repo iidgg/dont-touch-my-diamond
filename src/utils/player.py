@@ -99,10 +99,11 @@ class Player:
         self.movePlayer()
 
         if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
-            self.animateWalking()
+            if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.walking["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.walking["speed"])):
+                self.animateWalking()
 
         return self.playerSurface
-    
+
     def animateWalking(self):
         if self.animation["frame"] >= (self.walking["frames"] - self.animation["speed"]):
             self.animation["frame"] = 0
