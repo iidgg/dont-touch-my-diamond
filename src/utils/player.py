@@ -12,13 +12,6 @@ class Player:
         self.playerPOS = self.playerOldPOS = pygame.Vector2(
             constants.screen["WIDTH"] / 2, constants.screen["HEIGHT"] / 2)
 
-        # Player walking information
-        self.walking = {
-            "speed": speed,
-            "skin": None,
-            "frames": 6
-        }
-
         # Player direction
         self.playerDirection = "right"  # Is player facing left or right?
         
@@ -28,7 +21,6 @@ class Player:
         self.playerDimensions = {"width": 0, "height": 0}
         self.playerSurface = self.playerIndex
 
-        self.updatePlayerDirection("right")
 
         # Animation
         self.animation = {
@@ -36,6 +28,17 @@ class Player:
             "totalFrames": 6,
             "speed": 0.1
         }
+
+        # Player walking information
+        self.walking = {
+            "speed": speed,
+            "skin": None,
+            "frames": 0
+        }
+
+        self.walking["skin"] = self.getPlayerWalkingSkin()
+        self.walking["frames"] = self.playerIndex.get_width() / self.walking["skin"].get_width()
+        self.updatePlayerDirection("right")
 
         self.frameWidth = self.playerIndex.get_width()
         self.frameHeight = self.playerIndex.get_height()
@@ -49,14 +52,17 @@ class Player:
     
     def updatePlayerSkin(self):
         self.getPlayerIndex()
-        self.playerWalkingSkin = pygame.image.load(
-            f"src/images/Scar_L_Solider/walk/{self.playerDirection}.png")
+        self.getPlayerWalkingSkin()
         
     def getPlayerIndex(self):
-        p = self.playerIndex = pygame.image.load(
+        s = self.playerIndex = pygame.image.load(
             f"src/images/Scar_L_Solider/index/{self.playerDirection}.png")
-        return p
-        
+        return s
+    
+    def getPlayerWalkingSkin(self):
+        s = self.walking["skin"] = pygame.image.load(
+            f"src/images/Scar_L_Solider/walk/{self.playerDirection}.png")
+        return s
 
     def movePlayer(self):
         keys = pygame.key.get_pressed()
@@ -95,14 +101,14 @@ class Player:
 
         if self.animation["frame"] % 1 == 0:
             if self.playerDirection == "right":
-                self.playerSurface = self.playerWalkingSkin.subsurface(
+                self.playerSurface = self.walking["skin"].subsurface(
                     (self.animation["frame"] * 128, 0, 128, 128))
             else:
                 n = (self.walking["frames"] - self.animation["frame"])
                 if n == self.walking["frames"]:
                     n = 0
 
-                self.playerSurface = self.playerWalkingSkin.subsurface(
+                self.playerSurface = self.walking["skin"].subsurface(
                     n * 128, 0, 128, 128)
 
         return self.playerSurface
