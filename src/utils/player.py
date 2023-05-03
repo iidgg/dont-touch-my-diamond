@@ -14,22 +14,22 @@ class Player:
 
         # Player direction
         self.playerDirection = "right"  # Is player facing left or right?
-        
 
+        # Player skin
         self.skin = "Scar_L_Solider"
+
+        # Player initialize
         self.playerIndex = self.getPlayerIndex()
         self.playerDimensions = {"width": 0, "height": 0}
         self.playerSurface = self.playerIndex
 
-
         # Animation
         self.animation = {
             "frame": 0,
-            "totalFrames": 6,
             "speed": 0.1
         }
 
-        # Player walking information
+        # Player walking animation information
         self.walking = {
             "speed": speed,
             "skin": None,
@@ -37,31 +37,32 @@ class Player:
         }
 
         self.walking["skin"] = self.getPlayerWalkingSkin()
-        self.walking["frames"] = self.playerIndex.get_width() / self.walking["skin"].get_width()
+        self.walking["frames"] = self.walking["skin"].get_width() / \
+            self.playerIndex.get_width()
+
         self.updatePlayerDirection("right")
 
-        self.frameWidth = self.playerIndex.get_width()
-        self.frameHeight = self.playerIndex.get_height()
+        self.frame = self.playerDimensions
 
-        self.totalFramesWidth = self.frameWidth * self.walking["frames"]
+        self.totalFramesWidth = self.frame["width"] * self.walking["frames"]
 
     def updatePlayerDirection(self, direction):
         if direction in ["right", "left"]:
             self.playerDirection = direction
             self.updatePlayerSkin()
-    
+
     def updatePlayerSkin(self):
         self.getPlayerIndex()
         self.getPlayerWalkingSkin()
-        
+
     def getPlayerIndex(self):
         s = self.playerIndex = pygame.image.load(
-            f"src/images/Scar_L_Solider/index/{self.playerDirection}.png")
+            f"src/images/{self.skin}/walk/index/{self.playerDirection}.png")
         return s
-    
+
     def getPlayerWalkingSkin(self):
         s = self.walking["skin"] = pygame.image.load(
-            f"src/images/Scar_L_Solider/walk/{self.playerDirection}.png")
+            f"src/images/{self.skin}/walk/{self.playerDirection}.png")
         return s
 
     def movePlayer(self):
@@ -71,12 +72,14 @@ class Player:
         if self.playerPOS.x < 0:
             self.playerPOS.x = 0
         elif self.playerPOS.x >= constants.screen["WIDTH"] - self.playerDimensions["width"]:
-            self.playerPOS.x = constants.screen["WIDTH"] - self.playerDimensions["width"]
+            self.playerPOS.x = constants.screen["WIDTH"] - \
+                self.playerDimensions["width"]
 
         if self.playerPOS.y < 0:
             self.playerPOS.y = 0
         elif self.playerPOS.y >= constants.screen["WIDTH"] - self.playerDimensions["height"]:
-            self.playerPOS.y = constants.screen["WIDTH"] - self.playerDimensions["height"]
+            self.playerPOS.y = constants.screen["WIDTH"] - \
+                self.playerDimensions["height"]
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.playerPOS.y -= self.walking["speed"]
@@ -92,6 +95,7 @@ class Player:
 
     def updateAllPlayerIntents(self):
         self.movePlayer()
+
 
         if self.animation["frame"] >= (self.walking["frames"] - self.animation["speed"]):
             self.animation["frame"] = 0
