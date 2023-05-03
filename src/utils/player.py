@@ -9,8 +9,9 @@ class Player:
         self.y = y
 
         # Create a variable to store the player's position.
-        self.playerPOS = self.playerOldPOS = pygame.Vector2(
+        self.playerPOS = pygame.Vector2(
             constants.screen["WIDTH"] / 2, constants.screen["HEIGHT"] / 2)
+        self.playerOldPOS = {"x": 0, "y": 0}
 
         # Player direction
         self.playerDirection = "right"  # Is player facing left or right?
@@ -67,6 +68,8 @@ class Player:
 
     def movePlayer(self):
         keys = pygame.key.get_pressed()
+        self.playerOldPOS["x"] = self.playerPOS.x
+        self.playerOldPOS["y"] = self.playerPOS.y
 
         # Check if the player is about to go off screen.
         if self.playerPOS.x < 0:
@@ -91,12 +94,16 @@ class Player:
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.playerPOS.x += self.walking["speed"]
             self.updatePlayerDirection("right")
-        self.oldPlayerPOS = self.playerPOS
 
     def updateAllPlayerIntents(self):
         self.movePlayer()
 
+        if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
+            self.animateWalking()
 
+        return self.playerSurface
+    
+    def animateWalking(self):
         if self.animation["frame"] >= (self.walking["frames"] - self.animation["speed"]):
             self.animation["frame"] = 0
         else:
@@ -114,5 +121,3 @@ class Player:
 
                 self.playerSurface = self.walking["skin"].subsurface(
                     n * 128, 0, 128, 128)
-
-        return self.playerSurface
