@@ -24,7 +24,8 @@ class Player:
 
         # Player initialize
         self.playerIndex = self.getPlayerIndex()
-        self.playerDimensions = {"width": 0, "height": 0}
+        self.playerDimensions = {
+            "width": self.playerIndex.get_width(), "height": self.playerIndex.get_height()}
         self.playerSurface = self.playerIndex
 
         # Animation
@@ -124,11 +125,11 @@ class Player:
         if self.animation["frame"] % 1 == 0:
             if self.playerDirection == "right":
                 self.playerSurface = animationSkin.subsurface(
-                    (self.animation["frame"] * 128, 0, 128, 128))
+                    (self.animation["frame"] * self.frame["width"], 0, self.frame["width"], self.frame["height"]))
             else:
                 n = (animationFrames - self.animation["frame"])
                 if n == animationFrames:
                     n = 0
 
                 self.playerSurface = animationSkin.subsurface(
-                    n * 128, 0, 128, 128)
+                    n * self.frame["width"], 0, self.frame["width"], self.frame["height"])
