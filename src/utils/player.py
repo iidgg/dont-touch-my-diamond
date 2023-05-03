@@ -9,7 +9,7 @@ class Player:
         self.y = y
 
         # All available animations
-        self.animations = ["walking"]
+        self.animations = ["walking", "running"]
 
         # Create a variable to store the player's position.
         self.playerPOS = pygame.Vector2(
