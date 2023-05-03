@@ -8,6 +8,9 @@ class Player:
         self.x = x
         self.y = y
 
+        # All available animations
+        self.animations = ["walking"]
+
         # Create a variable to store the player's position.
         self.playerPOS = pygame.Vector2(
             constants.screen["WIDTH"] / 2, constants.screen["HEIGHT"] / 2)
@@ -100,12 +103,19 @@ class Player:
 
         if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
             if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.walking["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.walking["speed"])):
-                self.animateWalking()
+                self.animate("walking")
 
         return self.playerSurface
 
-    def animateWalking(self):
-        if self.animation["frame"] >= (self.walking["frames"] - self.animation["speed"]):
+    def animate(self, animation):
+        if not animation in self.animations:
+            return "Bruh bro"
+
+        animation = self.__dict__[animation]
+        animationFrames = animation["frames"]
+        animationSkin = animation["skin"]
+
+        if self.animation["frame"] >= (animationFrames - self.animation["speed"]):
             self.animation["frame"] = 0
         else:
             self.animation["frame"] = round(
@@ -113,12 +123,12 @@ class Player:
 
         if self.animation["frame"] % 1 == 0:
             if self.playerDirection == "right":
-                self.playerSurface = self.walking["skin"].subsurface(
+                self.playerSurface = animationSkin.subsurface(
                     (self.animation["frame"] * 128, 0, 128, 128))
             else:
-                n = (self.walking["frames"] - self.animation["frame"])
-                if n == self.walking["frames"]:
+                n = (animationFrames - self.animation["frame"])
+                if n == animationFrames:
                     n = 0
 
-                self.playerSurface = self.walking["skin"].subsurface(
+                self.playerSurface = animationSkin.subsurface(
                     n * 128, 0, 128, 128)
