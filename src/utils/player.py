@@ -12,9 +12,6 @@ class Player:
         self.playerDirection = self.playerSkin = self.playerWalkingSkin = None  # None is NULL
         self.updatePlayerDirection("right")
 
-        self.playerWidth = self.playerSkin.get_width()
-        self.playerHeight = self.playerSkin.get_height()
-
         self.playerSurface = self.playerSkin
 
         # Create a variable to store the player's position.
@@ -22,11 +19,11 @@ class Player:
             WIDTH / 2, HEIGHT / 2)
 
         self.walkingFrame = 0
-        self.totalWalkingFrames = 8
+        self.totalWalkingFrames = 6
         self.animationSpeed = 0.1
 
-        self.frameWidth = 128
-        self.frameHeight = 128
+        self.frameWidth = self.playerWidth = self.playerSkin.get_width()
+        self.frameHeight = self.playerHeight = self.playerSkin.get_height()
 
         self.totalFramesWidth = self.frameWidth * self.totalWalkingFrames
 
@@ -34,9 +31,9 @@ class Player:
         if direction in ["right", "left"]:
             self.playerDirection = direction
             self.playerSkin = pygame.image.load(
-                f"src/images/woodcutter/index/{self.playerDirection}.png")
+                f"src/images/Scar_L_Solider/index/{self.playerDirection}.png")
             self.playerWalkingSkin = pygame.image.load(
-                f"src/images/woodcutter/run/{self.playerDirection}.png")
+                f"src/images/Scar_L_Solider/walk/{self.playerDirection}.png")
 
     def movePlayer(self):
         keys = pygame.key.get_pressed()
@@ -83,6 +80,6 @@ class Player:
                     n = 0
 
                 self.playerSurface = self.playerWalkingSkin.subsurface(
-                     n * 128, 0, 128, 128)
+                    n * 128, 0, 128, 128)
 
         return self.playerSurface
