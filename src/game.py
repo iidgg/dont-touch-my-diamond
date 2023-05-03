@@ -1,15 +1,15 @@
 import pygame
-from constants import *
+import constants
 from utils.player import Player
 
 
 pygame.init() # Initialize Pygame.
-screen = pygame.display.set_mode((WIDTH, HEIGHT)) # Create the screen.
+screen = pygame.display.set_mode((constants.screen["WIDTH"], constants.screen["HEIGHT"])) # Create the screen.
 pygame.display.set_caption("Don't touch my diamonds!") # Set the window title.
 clock = pygame.time.Clock() # Create a clock object.
 running = True # Create a variable to track if the game is running.
 
-player = Player(WIDTH / 2, HEIGHT / 2, 0.5)
+player = Player(constants.screen["WIDTH"] / 2, constants.screen["HEIGHT"] / 2, 0.5)
 
 while running:
     # Get all events that happened since the last frame.

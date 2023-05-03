@@ -1,39 +1,62 @@
 import pygame
-from constants import *
+import constants
 
 
 class Player:
     def __init__(self, x, y, speed):
+        # Player init location
         self.x = x
         self.y = y
 
-        self.playerSpeed = speed
-
-        self.playerDirection = self.playerSkin = self.playerWalkingSkin = None  # None is NULL
-        self.updatePlayerDirection("right")
-
-        self.playerSurface = self.playerSkin
-
         # Create a variable to store the player's position.
         self.playerPOS = self.playerOldPOS = pygame.Vector2(
-            WIDTH / 2, HEIGHT / 2)
+            constants.screen["WIDTH"] / 2, constants.screen["HEIGHT"] / 2)
 
-        self.walkingFrame = 0
-        self.totalWalkingFrames = 6
-        self.animationSpeed = 0.1
+        # Player walking information
+        self.walking = {
+            "speed": speed,
+            "skin": None,
+            "frames": 6
+        }
 
-        self.frameWidth = self.playerWidth = self.playerSkin.get_width()
-        self.frameHeight = self.playerHeight = self.playerSkin.get_height()
+        # Player direction
+        self.playerDirection = "right"  # Is player facing left or right?
+        
 
-        self.totalFramesWidth = self.frameWidth * self.totalWalkingFrames
+        self.skin = "Scar_L_Solider"
+        self.playerIndex = self.getPlayerIndex()
+        self.playerDimensions = {"width": 0, "height": 0}
+        self.playerSurface = self.playerIndex
+
+        self.updatePlayerDirection("right")
+
+        # Animation
+        self.animation = {
+            "frame": 0,
+            "totalFrames": 6,
+            "speed": 0.1
+        }
+
+        self.frameWidth = self.playerIndex.get_width()
+        self.frameHeight = self.playerIndex.get_height()
+
+        self.totalFramesWidth = self.frameWidth * self.walking["frames"]
 
     def updatePlayerDirection(self, direction):
         if direction in ["right", "left"]:
             self.playerDirection = direction
-            self.playerSkin = pygame.image.load(
-                f"src/images/Scar_L_Solider/index/{self.playerDirection}.png")
-            self.playerWalkingSkin = pygame.image.load(
-                f"src/images/Scar_L_Solider/walk/{self.playerDirection}.png")
+            self.updatePlayerSkin()
+    
+    def updatePlayerSkin(self):
+        self.getPlayerIndex()
+        self.playerWalkingSkin = pygame.image.load(
+            f"src/images/Scar_L_Solider/walk/{self.playerDirection}.png")
+        
+    def getPlayerIndex(self):
+        p = self.playerIndex = pygame.image.load(
+            f"src/images/Scar_L_Solider/index/{self.playerDirection}.png")
+        return p
+        
 
     def movePlayer(self):
         keys = pygame.key.get_pressed()
@@ -41,42 +64,42 @@ class Player:
         # Check if the player is about to go off screen.
         if self.playerPOS.x < 0:
             self.playerPOS.x = 0
-        elif self.playerPOS.x >= WIDTH - self.playerWidth:
-            self.playerPOS.x = WIDTH - self.playerWidth
+        elif self.playerPOS.x >= constants.screen["WIDTH"] - self.playerDimensions["width"]:
+            self.playerPOS.x = constants.screen["WIDTH"] - self.playerDimensions["width"]
 
         if self.playerPOS.y < 0:
             self.playerPOS.y = 0
-        elif self.playerPOS.y >= HEIGHT - self.playerHeight:
-            self.playerPOS.y = HEIGHT - self.playerHeight
+        elif self.playerPOS.y >= constants.screen["WIDTH"] - self.playerDimensions["height"]:
+            self.playerPOS.y = constants.screen["WIDTH"] - self.playerDimensions["height"]
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.playerPOS.y -= self.playerSpeed
+            self.playerPOS.y -= self.walking["speed"]
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.playerPOS.y += self.playerSpeed
+            self.playerPOS.y += self.walking["speed"]
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.playerPOS.x -= self.playerSpeed
+            self.playerPOS.x -= self.walking["speed"]
             self.updatePlayerDirection("left")
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.playerPOS.x += self.playerSpeed
+            self.playerPOS.x += self.walking["speed"]
             self.updatePlayerDirection("right")
         self.oldPlayerPOS = self.playerPOS
 
     def updateAllPlayerIntents(self):
         self.movePlayer()
 
-        if self.walkingFrame >= (self.totalWalkingFrames - self.animationSpeed):
-            self.walkingFrame = 0
+        if self.animation["frame"] >= (self.walking["frames"] - self.animation["speed"]):
+            self.animation["frame"] = 0
         else:
-            self.walkingFrame = round(
-                self.walkingFrame + self.animationSpeed, 2)
+            self.animation["frame"] = round(
+                self.animation["frame"] + self.animation["speed"], 2)
 
-        if self.walkingFrame % 1 == 0:
+        if self.animation["frame"] % 1 == 0:
             if self.playerDirection == "right":
                 self.playerSurface = self.playerWalkingSkin.subsurface(
-                    (self.walkingFrame * 128, 0, 128, 128))
+                    (self.animation["frame"] * 128, 0, 128, 128))
             else:
-                n = (self.totalWalkingFrames - self.walkingFrame)
-                if n == self.totalWalkingFrames:
+                n = (self.walking["frames"] - self.animation["frame"])
+                if n == self.walking["frames"]:
                     n = 0
 
                 self.playerSurface = self.playerWalkingSkin.subsurface(

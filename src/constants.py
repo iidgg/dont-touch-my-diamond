@@ -1,1 +1,1 @@
-WIDTH, HEIGHT = 1080, 720 # Define the screen size.
+screen = {"WIDTH": 1080, "HEIGHT":  720} # Define the screen size.
