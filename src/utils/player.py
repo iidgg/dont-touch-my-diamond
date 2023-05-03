@@ -6,11 +6,10 @@ class Player:
         self.x = x
         self.y = y
 
-        self.playerDirection = "right"
         self.playerSpeed = speed
 
-        self.playerSkin = pygame.image.load(f"src/images/woodcutter/index/{self.playerDirection}.png")
-        self.playerWalkingSkin = pygame.image.load(f"src/images/woodcutter/walk/{self.playerDirection}.png")
+        self.playerDirection = self.playerSkin = self.playerWalkingSkin = None # None is NULL
+        self.updatePlayerDirection("right")
 
         self.playerWidth = self.playerSkin.get_width()
         self.playerHeight = self.playerSkin.get_height()
@@ -20,7 +19,13 @@ class Player:
         self.playerPOS = self.playerOldPOS = pygame.Vector2(WIDTH / 2, HEIGHT / 2) # Create a variable to store the player's position.
 
         self.walkingFrame = 0
-        self.animationSpeed = 0.1
+        self.animationSpeed = 0.05 # يقص 6 مكعبت
+
+    def updatePlayerDirection(self, direction):
+        if direction in ["right", "left"]:
+            self.playerDirection = direction     
+            self.playerSkin = pygame.image.load(f"src/images/woodcutter/index/{self.playerDirection}.png")
+            self.playerWalkingSkin = pygame.image.load(f"src/images/woodcutter/walk/{self.playerDirection}.png")
 
     def movePlayer(self):
         keys = pygame.key.get_pressed()
@@ -42,8 +47,10 @@ class Player:
             self.playerPOS.y += self.playerSpeed
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.playerPOS.x -= self.playerSpeed
+            self.updatePlayerDirection("left")
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.playerPOS.x += self.playerSpeed
+            self.updatePlayerDirection("right")
         self.oldPlayerPOS = self.playerPOS
 
     def updateAllPlayerIntents(self):
