@@ -19,7 +19,7 @@ class Player:
         self.playerPOS = self.playerOldPOS = pygame.Vector2(WIDTH / 2, HEIGHT / 2) # Create a variable to store the player's position.
 
         self.walkingFrame = 0
-        self.animationSpeed = 0.05 # يقص 6 مكعبت
+        self.animationSpeed = 0.05 # يقص 6 مكعبات
 
     def updatePlayerDirection(self, direction):
         if direction in ["right", "left"]:
