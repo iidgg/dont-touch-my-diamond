@@ -41,6 +41,12 @@ class Player:
             "frames": 0
         }
 
+        self.running = {
+            "speed": speed * 2,
+            "skin": None,
+            "frames": 0
+        }
+
         self.walking["skin"] = self.getPlayerWalkingSkin()
         self.walking["frames"] = self.walking["skin"].get_width() / \
             self.playerIndex.get_width()
@@ -62,12 +68,12 @@ class Player:
 
     def getPlayerIndex(self):
         s = self.playerIndex = pygame.image.load(
-            f"src/images/{self.skin}/walk/index/{self.playerDirection}.png")
+            f"src/images/{self.skin}/walking/index/{self.playerDirection}.png")
         return s
 
     def getPlayerWalkingSkin(self):
         s = self.walking["skin"] = pygame.image.load(
-            f"src/images/{self.skin}/walk/{self.playerDirection}.png")
+            f"src/images/{self.skin}/walking/{self.playerDirection}.png")
         return s
 
     def movePlayer(self):
