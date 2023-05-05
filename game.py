@@ -1,6 +1,6 @@
 import pygame
-import constants
-from utils.player import Player
+import src.constants as constants
+from src.utils.player import Player
 
 
 pygame.init() # Initialize Pygame.

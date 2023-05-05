@@ -1,5 +1,5 @@
 import pygame
-import constants
+import src.constants as constants
 
 
 class Player:
