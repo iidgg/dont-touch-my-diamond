@@ -1,5 +1,6 @@
 import pygame
 
+
 class CharacterStatuses:
     def __init__(self):
         # All available animations
@@ -10,8 +11,9 @@ class CharacterStatuses:
         "Animation"
         "AnimationSpeed"
         "Speed * Number = the player speed *Speed = The given speed to the class*"
-        """ # With spaces between each
-        self.AI = [f"{a[0]} 0.1 1", f"{a[1]} 0.2 2", "flying 0.5 5"] # Animation information
+        """  # With spaces between each
+        self.AI = [f"{a[0]} 0.1 1", f"{a[1]} 0.2 2"]
+        # ^ Animation information
 
         self.status = {
             # Player direction
@@ -21,15 +23,24 @@ class CharacterStatuses:
             # Player skin
             "skin": "Scar_L_Solider",
 
-            
+
         }
 
-        for e in self.AI: # e Stands for element
+        for e in self.AI:  # e Stands for element
             eSplitted = e.split()
+            name = eSplitted[0]
 
-            self.status[eSplitted[0]] = {
-                "speed": float(eSplitted[1]), # animation speed "how fast do we switch frames"
-                "skin": None, # None is Null
+            if not name in self.animations:
+                print("Failed to load animation Named: ", name)
+                return
+
+            self.status[name] = {
+                # animation speed "how fast do we switch frames"
+                "speed": float(eSplitted[1]),
+                "skin": {
+                    "animated": self.getSkin(name, False),
+                    "index": self.getSkin(name, True)
+                },
                 "frames": {
                     "total": int(eSplitted[2]),
                     "current": 0
@@ -39,12 +50,11 @@ class CharacterStatuses:
     def getSkin(self, animation, isIndex):
         if not animation:
             return 1
-        
+
         ext = ""
         if isIndex:
             ext = "index/"
-        
-        
+
         s = self.status[f"{animation}.skin"] = pygame.image.load(
             f"src/images/{self.status['skin']}/{animation}/{ext}{self.status['direction']}.png")
         return s
