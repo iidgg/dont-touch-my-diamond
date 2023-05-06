@@ -1,19 +1,20 @@
 import pygame
-import src.constants as constants
+import src.constants as C
+from src.utils.characters.defStatuses import CharacterStatuses
 
 
-class Player:
+class Player(CharacterStatuses):
     def __init__(self, x, y, speed):
+        # Initialize the extended classes
+        super().__init__() 
+
         # Player init location
         self.x = x
         self.y = y
 
-        # All available animations
-        self.animations = ["walking", "running"]
-
         # Create a variable to store the player's position.
         self.playerPOS = pygame.Vector2(
-            constants.screen["WIDTH"] / 2, constants.screen["HEIGHT"] / 2)
+            C.screen["width"] / 2, C.screen["height"] / 2)
         self.playerOldPOS = {"x": 0, "y": 0}
 
         # Player direction
@@ -84,14 +85,14 @@ class Player:
         # Check if the player is about to go off screen.
         if self.playerPOS.x < 0:
             self.playerPOS.x = 0
-        elif self.playerPOS.x >= constants.screen["WIDTH"] - self.playerDimensions["width"]:
-            self.playerPOS.x = constants.screen["WIDTH"] - \
+        elif self.playerPOS.x >= C.screen["width"] - self.playerDimensions["width"]:
+            self.playerPOS.x = C.screen["width"] - \
                 self.playerDimensions["width"]
 
         if self.playerPOS.y < 0:
             self.playerPOS.y = 0
-        elif self.playerPOS.y >= constants.screen["WIDTH"] - self.playerDimensions["height"]:
-            self.playerPOS.y = constants.screen["WIDTH"] - \
+        elif self.playerPOS.y >= C.screen["width"] - self.playerDimensions["height"]:
+            self.playerPOS.y = C.screen["width"] - \
                 self.playerDimensions["height"]
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
