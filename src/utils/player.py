@@ -17,9 +17,6 @@ class Player(CharacterStatuses):
             C.screen["width"] / 2, C.screen["height"] / 2)
         self.playerOldPOS = {"x": 0, "y": 0}
 
-        # Player direction
-        self.playerDirection = "right"  # Is player facing left or right?
-
         # Player skin
         self.skin = "Scar_L_Solider"
 
@@ -59,8 +56,8 @@ class Player(CharacterStatuses):
         self.totalFramesWidth = self.frame["width"] * self.walking["frames"]
 
     def updatePlayerDirection(self, direction):
-        if direction in ["right", "left"]:
-            self.playerDirection = direction
+        if direction in self.characterStatuses["allDirections"]:
+            self.characterStatuses["direction"] = direction
             self.updatePlayerSkin()
 
     def updatePlayerSkin(self):
@@ -68,13 +65,15 @@ class Player(CharacterStatuses):
         self.getPlayerWalkingSkin()
 
     def getPlayerIndex(self):
+        d = self.characterStatuses["direction"]
         s = self.playerIndex = pygame.image.load(
-            f"src/images/{self.skin}/walking/index/{self.playerDirection}.png")
+            f"src/images/{self.skin}/walking/index/{d}.png")
         return s
 
     def getPlayerWalkingSkin(self):
+        d = self.characterStatuses["direction"]
         s = self.walking["skin"] = pygame.image.load(
-            f"src/images/{self.skin}/walking/{self.playerDirection}.png")
+            f"src/images/{self.skin}/walking/{d}.png")
         return s
 
     def movePlayer(self):
@@ -130,7 +129,7 @@ class Player(CharacterStatuses):
                 self.animation["frame"] + self.animation["speed"], 2)
 
         if self.animation["frame"] % 1 == 0:
-            if self.playerDirection == "right":
+            if self.characterStatuses["direction"] == "right":
                 self.playerSurface = animationSkin.subsurface(
                     (self.animation["frame"] * self.frame["width"], 0, self.frame["width"], self.frame["height"]))
             else:

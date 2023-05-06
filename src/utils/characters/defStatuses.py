@@ -2,7 +2,7 @@ class CharacterStatuses:
     def __init__(self):
         # All available animations
         self.animations = a = ["walking", "running"]
-        
+
         """"
         Structure:
         "Animation"
@@ -14,6 +14,7 @@ class CharacterStatuses:
         self.characterStatuses = {
             # Player direction
             "direction": "right",  # Is player facing left or right?
+            "allDirections": ["right", "left"],
 
             # Player skin
             "skin": "Scar_L_Solider",
