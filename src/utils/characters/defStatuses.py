@@ -2,6 +2,7 @@ class CharacterStatuses:
     def __init__(self):
         # All available animations
         self.animations = a = ["walking", "running"]
+        
         """"
         Structure:
         "Animation"
