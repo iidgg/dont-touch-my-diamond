@@ -65,14 +65,12 @@ class Player(CharacterStatuses):
         d = self.status["direction"]
         sk = self.status["skin"]
         s = self.playerIndex = pygame.image.load(
-            f"src/images/{sk}/walking/index/{d}.png")
+            f"src/images/{self.status['skin']}/walking/index/{self.status['direction']}.png")
         return s
 
     def getPlayerWalkingSkin(self):
-        d = self.status["direction"]
-        sk = self.status["skin"]
         s = self.walking["skin"] = pygame.image.load(
-            f"src/images/{sk}/walking/{d}.png")
+            f"src/images/{self.status['skin']}/walking/{self.status['direction']}.png")
         return s
 
     def movePlayer(self):
