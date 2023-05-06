@@ -8,6 +8,8 @@ class Player(CharacterStatuses):
         # Initialize the extended classes
         super().__init__() 
 
+        print(self.status)
+
         # Player init location
         self.x = x
         self.y = y
@@ -62,8 +64,6 @@ class Player(CharacterStatuses):
         self.getPlayerWalkingSkin()
 
     def getPlayerIndex(self):
-        d = self.status["direction"]
-        sk = self.status["skin"]
         s = self.playerIndex = pygame.image.load(
             f"src/images/{self.status['skin']}/walking/index/{self.status['direction']}.png")
         return s
