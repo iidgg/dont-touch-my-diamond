@@ -8,15 +8,8 @@ class Player(CharacterStatuses):
         # Initialize the extended classes
         super().__init__() 
 
-        print(self.status)
-
-        # Player init location
-        self.x = x
-        self.y = y
-
         # Create a variable to store the player's position.
-        self.playerPOS = pygame.Vector2(
-            C.screen["width"] / 2, C.screen["height"] / 2)
+        self.playerPOS = pygame.Vector2(x, y)
         self.playerOldPOS = {"x": 0, "y": 0}
 
         # Player initialize
