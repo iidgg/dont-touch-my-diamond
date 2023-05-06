@@ -17,9 +17,6 @@ class Player(CharacterStatuses):
             C.screen["width"] / 2, C.screen["height"] / 2)
         self.playerOldPOS = {"x": 0, "y": 0}
 
-        # Player skin
-        self.skin = "Scar_L_Solider"
-
         # Player initialize
         self.playerIndex = self.getPlayerIndex()
         self.playerDimensions = {
@@ -66,14 +63,16 @@ class Player(CharacterStatuses):
 
     def getPlayerIndex(self):
         d = self.characterStatuses["direction"]
+        sk = self.characterStatuses["skin"]
         s = self.playerIndex = pygame.image.load(
-            f"src/images/{self.skin}/walking/index/{d}.png")
+            f"src/images/{sk}/walking/index/{d}.png")
         return s
 
     def getPlayerWalkingSkin(self):
         d = self.characterStatuses["direction"]
+        sk = self.characterStatuses["skin"]
         s = self.walking["skin"] = pygame.image.load(
-            f"src/images/{self.skin}/walking/{d}.png")
+            f"src/images/{sk}/walking/{d}.png")
         return s
 
     def movePlayer(self):
