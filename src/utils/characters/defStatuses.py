@@ -42,7 +42,11 @@ class CharacterStatuses:
                     "index": self.getSkin(name, True)
                 },
                 "frames": {
-                    "total": int(eSplitted[2]),
+                    "total": {
+                       "count": int(eSplitted[2]),
+                       "width": "c"
+                    },
+                    "width": 0,
                     "current": 0
                 }
             }
@@ -58,3 +62,10 @@ class CharacterStatuses:
         s = self.status[f"{animation}.skin"] = pygame.image.load(
             f"src/images/{self.status['skin']}/{animation}/{ext}{self.status['direction']}.png")
         return s
+    
+    def updateDirection(self, direction):
+        if direction in self.status["allDirections"]:
+            self.status["direction"] = direction
+
+            # TODO: do this update skin please bro
+            # self.updatePlayerSkin()

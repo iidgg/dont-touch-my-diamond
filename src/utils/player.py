@@ -18,12 +18,6 @@ class Player(CharacterStatuses):
             "width": self.playerIndex.get_width(), "height": self.playerIndex.get_height()}
         self.playerSurface = self.playerIndex
 
-        # Animation
-        self.animation = {
-            "frame": 0,
-            "speed": 0.1
-        }
-
         # Player walking animation information
         self.walking = {
             "speed": speed,
@@ -31,39 +25,9 @@ class Player(CharacterStatuses):
             "frames": 0
         }
 
-        self.running = {
-            "speed": speed * 2,
-            "skin": None,
-            "frames": 0
-        }
-
-        self.walking["skin"] = self.getPlayerWalkingSkin()
-        self.walking["frames"] = self.walking["skin"].get_width() / \
-            self.playerIndex.get_width()
-
-        self.updatePlayerDirection("right")
-
-        self.frame = self.playerDimensions
-
-        self.totalFramesWidth = self.frame["width"] * self.walking["frames"]
-
-    def updatePlayerDirection(self, direction):
-        if direction in self.status["allDirections"]:
-            self.status["direction"] = direction
-            self.updatePlayerSkin()
-
-    def updatePlayerSkin(self):
-        self.getPlayerIndex()
-        self.getPlayerWalkingSkin()
-
     def getPlayerIndex(self):
         s = self.playerIndex = pygame.image.load(
             f"src/images/{self.status['skin']}/walking/index/{self.status['direction']}.png")
-        return s
-
-    def getPlayerWalkingSkin(self):
-        s = self.walking["skin"] = pygame.image.load(
-            f"src/images/{self.status['skin']}/walking/{self.status['direction']}.png")
         return s
 
     def movePlayer(self):
@@ -90,42 +54,42 @@ class Player(CharacterStatuses):
             self.playerPOS.y += self.walking["speed"]
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.playerPOS.x -= self.walking["speed"]
-            self.updatePlayerDirection("left")
+            # self.updatePlayerDirection("left")
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.playerPOS.x += self.walking["speed"]
-            self.updatePlayerDirection("right")
+            # self.updatePlayerDirection("right")
 
     def updateAllPlayerIntents(self):
         self.movePlayer()
 
-        if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
-            if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.walking["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.walking["speed"])):
-                self.animate("walking")
+        # if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
+        #     if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.walking["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.walking["speed"])):
+        #         self.animate("walking")
 
         return self.playerSurface
 
-    def animate(self, animation):
-        if not animation in self.animations:
-            return "Bruh bro"
+    # def animate(self, animation):
+    #     if not animation in self.animations:
+    #         return "Bruh bro"
 
-        animation = self.__dict__[animation]
-        animationFrames = animation["frames"]
-        animationSkin = animation["skin"]
+    #     animation = self.__dict__[animation]
+    #     animationFrames = animation["frames"]
+    #     animationSkin = animation["skin"]
 
-        if self.animation["frame"] >= (animationFrames - self.animation["speed"]):
-            self.animation["frame"] = 0
-        else:
-            self.animation["frame"] = round(
-                self.animation["frame"] + self.animation["speed"], 2)
+    #     if self.animation["frame"] >= (animationFrames - self.animation["speed"]):
+    #         self.animation["frame"] = 0
+    #     else:
+    #         self.animation["frame"] = round(
+    #             self.animation["frame"] + self.animation["speed"], 2)
 
-        if self.animation["frame"] % 1 == 0:
-            if self.status["direction"] == "right":
-                self.playerSurface = animationSkin.subsurface(
-                    (self.animation["frame"] * self.frame["width"], 0, self.frame["width"], self.frame["height"]))
-            else:
-                n = (animationFrames - self.animation["frame"])
-                if n == animationFrames:
-                    n = 0
+    #     if self.animation["frame"] % 1 == 0:
+    #         if self.status["direction"] == "right":
+    #             self.playerSurface = animationSkin.subsurface(
+    #                 (self.animation["frame"] * self.frame["width"], 0, self.frame["width"], self.frame["height"]))
+    #         else:
+    #             n = (animationFrames - self.animation["frame"])
+    #             if n == animationFrames:
+    #                 n = 0
 
-                self.playerSurface = animationSkin.subsurface(
-                    n * self.frame["width"], 0, self.frame["width"], self.frame["height"])
+    #             self.playerSurface = animationSkin.subsurface(
+    #                 n * self.frame["width"], 0, self.frame["width"], self.frame["height"])
