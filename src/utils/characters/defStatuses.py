@@ -11,7 +11,7 @@ class CharacterStatuses:
         """ # With spaces between each
         self.AI = [f"{a[0]} 0.1 1", f"{a[1]} 0.2 2"] # Animation information
 
-        self.characterStatuses = {
+        self.status = {
             # Player direction
             "direction": "right",  # Is player facing left or right?
             "allDirections": ["right", "left"],
