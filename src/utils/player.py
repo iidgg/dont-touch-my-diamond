@@ -1,12 +1,12 @@
 import pygame
 import src.constants as C
-from src.utils.characters.defStatuses import CharacterStatuses
+from src.utils.character import Character
 
 
-class Player(CharacterStatuses):
+class Player(Character):
     def __init__(self, x, y, speed):
         # Initialize the extended classes
-        super().__init__() 
+        super().__init__()
 
         # Create a variable to store the player's position.
         self.playerPOS = pygame.Vector2(x, y)
