@@ -1,6 +1,6 @@
 import pygame
 
-
+# TODO: figure out where to keep the actual animation function, new class?
 class CharacterStatuses:
     def __init__(self):
         # All available animations

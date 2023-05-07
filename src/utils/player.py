@@ -2,7 +2,7 @@ import pygame
 import src.constants as C
 from src.utils.character import Character
 
-
+# TODO: in short just clean the fucking code bro
 class Player(Character):
     def __init__(self, x, y, speed):
         # TODO: Move this crap out to either Character class or else
@@ -62,6 +62,8 @@ class Player(Character):
         #         self.animate("walking")
 
         return self.playerSurface
+    
+    # TODO: And this crap too needs to move the fuck out of here
 
     # def animate(self, animation):
     #     if not animation in self.animations:
