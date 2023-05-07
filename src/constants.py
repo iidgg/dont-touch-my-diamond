@@ -5,6 +5,6 @@ msd = { # Mid screen dictionary
     "x": screen["width"] / 2 # X is the horizontal width
 } 
 # ? Future me, please trust me, I've searched and conformed the information above.
-# ? I've done me research, and I'm telling you, it's legit. So don't worry, I got this.
+# ? I've done my research, and I'm telling you, it's legit. So don't worry, I got this.
 
 ms = (msd["x"], msd["y"]) # Mid screen
