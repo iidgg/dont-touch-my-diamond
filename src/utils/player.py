@@ -18,13 +18,6 @@ class Player(Character):
             "width": self.playerIndex.get_width(), "height": self.playerIndex.get_height()}
         self.playerSurface = self.playerIndex
 
-        # Player walking animation information
-        self.walking = {
-            "speed": speed,
-            "skin": None,
-            "frames": 0
-        }
-
     def getPlayerIndex(self):
         s = self.playerIndex = pygame.image.load(
             f"src/images/{self.status['skin']}/walking/index/{self.status['direction']}.png")
@@ -49,21 +42,21 @@ class Player(Character):
                 self.playerDimensions["height"]
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.playerPOS.y -= self.walking["speed"]
+            self.playerPOS.y -= self.status["walking"]["speed"]
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.playerPOS.y += self.walking["speed"]
+            self.playerPOS.y += self.status["walking"]["speed"]
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.playerPOS.x -= self.walking["speed"]
+            self.playerPOS.x -= self.status["walking"]["speed"]
             # self.updatePlayerDirection("left")
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.playerPOS.x += self.walking["speed"]
+            self.playerPOS.x += self.status["walking"]["speed"]
             # self.updatePlayerDirection("right")
 
     def updateAllPlayerIntents(self):
         self.movePlayer()
 
         # if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
-        #     if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.walking["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.walking["speed"])):
+        #     if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.status["walking"]["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.status["walking"]["speed"])):
         #         self.animate("walking")
 
         return self.playerSurface
