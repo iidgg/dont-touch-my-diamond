@@ -5,6 +5,8 @@ from src.utils.character import Character
 
 class Player(Character):
     def __init__(self, x, y, speed):
+        # TODO: Move this crap out to either Character class or else
+
         # Initialize the extended classes
         super().__init__()
 
