@@ -15,9 +15,6 @@ class Player(Character):
         self.playerOldPOS = {"x": 0, "y": 0}
 
         # Player initialize
-        self.playerIndex = self.status["walking"]["skin"]["index"]
-        self.playerDimensions = {
-            "width": self.playerIndex.get_width(), "height": self.playerIndex.get_height()}
         self.playerSurface = self.status["walking"]["skin"]["index"]
 
     def movePlayer(self):
@@ -30,15 +27,17 @@ class Player(Character):
         # Check if the player is about to go off screen.
         if self.playerPOS.x < 0:
             self.playerPOS.x = 0
-        elif self.playerPOS.x >= C.screen["width"] - self.playerDimensions["width"]:
+        elif self.playerPOS.x >= C.screen["width"] - self.status["walking"]["dimensions"]["width"]:
             self.playerPOS.x = C.screen["width"] - \
-                self.playerDimensions["width"]
+                self.status["walking"]["dimensions"]["width"]
+            
 
+        
         if self.playerPOS.y < 0:
             self.playerPOS.y = 0
-        elif self.playerPOS.y >= C.screen["width"] - self.playerDimensions["height"]:
+        elif self.playerPOS.y >= C.screen["width"] - self.status["walking"]["dimensions"]["height"]:
             self.playerPOS.y = C.screen["width"] - \
-                self.playerDimensions["height"]
+                self.status["walking"]["dimensions"]["height"]
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.playerPOS.y -= self.status["walking"]["speed"]
