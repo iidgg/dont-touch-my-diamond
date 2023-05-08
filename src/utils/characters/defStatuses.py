@@ -1,8 +1,5 @@
 import pygame
 
-# TODO: figure out where to keep the actual animation function, new class?
-
-
 class CharacterStatuses:
     def __init__(self):
         # All available animations
@@ -24,10 +21,28 @@ class CharacterStatuses:
 
             # Player skin
             "skin": "Scar_L_Solider",
-
-
         }
 
+        self.updateSkins()
+
+    def getSkin(self, animation, isIndex):
+        if not animation:
+            return 1
+
+        ext = ""
+        if isIndex:
+            ext = "index/"
+
+        s = self.status[f"{animation}.skin"] = pygame.image.load(
+            f"src/images/{self.status['skin']}/{animation}/{ext}{self.status['direction']}.png")
+        return s
+
+    def updateDirection(self, direction):
+        if direction in self.status["allDirections"]:
+            self.status["direction"] = direction
+            self.updateSkins()
+
+    def updateSkins(self):
         for e in self.AI:  # e Stands for element
             eSplitted = e.split()
             name = eSplitted[0]
@@ -61,22 +76,3 @@ class CharacterStatuses:
                     "height": skin["index"].get_height()
                 }
             }
-
-    def getSkin(self, animation, isIndex):
-        if not animation:
-            return 1
-
-        ext = ""
-        if isIndex:
-            ext = "index/"
-
-        s = self.status[f"{animation}.skin"] = pygame.image.load(
-            f"src/images/{self.status['skin']}/{animation}/{ext}{self.status['direction']}.png")
-        return s
-
-    def updateDirection(self, direction):
-        if direction in self.status["allDirections"]:
-            self.status["direction"] = direction
-
-            # TODO: do this update skin please bro
-            # self.updatePlayerSkin()

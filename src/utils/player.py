@@ -15,17 +15,14 @@ class Player(Character):
         self.playerOldPOS = {"x": 0, "y": 0}
 
         # Player initialize
-        self.playerIndex = self.getPlayerIndex()
+        self.playerIndex = self.status["walking"]["skin"]["index"]
         self.playerDimensions = {
             "width": self.playerIndex.get_width(), "height": self.playerIndex.get_height()}
-        self.playerSurface = self.playerIndex
-
-    def getPlayerIndex(self):
-        s = self.playerIndex = pygame.image.load(
-            f"src/images/{self.status['skin']}/walking/index/{self.status['direction']}.png")
-        return s
+        self.playerSurface = self.status["walking"]["skin"]["index"]
 
     def movePlayer(self):
+        self.playerSurface = self.status["walking"]["skin"]["index"]
+
         keys = pygame.key.get_pressed()
         self.playerOldPOS["x"] = self.playerPOS.x
         self.playerOldPOS["y"] = self.playerPOS.y
@@ -49,10 +46,10 @@ class Player(Character):
             self.playerPOS.y += self.status["walking"]["speed"]
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.playerPOS.x -= self.status["walking"]["speed"]
-            # self.updatePlayerDirection("left")
+            self.updateDirection("left")
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.playerPOS.x += self.status["walking"]["speed"]
-            # self.updatePlayerDirection("right")
+            self.updateDirection("right")
 
     def updateAllPlayerIntents(self):
         self.movePlayer()
