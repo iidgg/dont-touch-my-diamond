@@ -32,7 +32,7 @@ class Player(Character):
                 self.status["walking"]["dimensions"]["width"]
             
 
-        
+        # TODO: Bruh bro! the player can go off screen down
         if self.playerPOS.y < 0:
             self.playerPOS.y = 0
         elif self.playerPOS.y >= C.screen["width"] - self.status["walking"]["dimensions"]["height"]:
