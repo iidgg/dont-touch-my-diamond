@@ -56,7 +56,10 @@ class CharacterStatuses:
                     "width": 0,
                     "current": 0
                 },
-                "dimensions": {"width": skin["index"].get_width(), "height": skin["index"].get_height()}
+                "dimensions": {
+                    "width": skin["index"].get_width(),
+                    "height": skin["index"].get_height()
+                }
             }
 
     def getSkin(self, animation, isIndex):
