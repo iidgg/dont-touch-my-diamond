@@ -4,6 +4,7 @@ class CharacterMovements:
     def __init__(self):
         # All available animations
         self.animations = a = ["walking", "running"]
+        self.directions = ["right", "left"]
 
         """"
         Structure:
@@ -18,7 +19,6 @@ class CharacterMovements:
             # Player direction
             "oldDirection": "",
             "direction": "right",  # Is player facing left or right?
-            "allDirections": ["right", "left"],
 
             # Player skin
             "skin": "Scar_L_Solider",
@@ -41,7 +41,7 @@ class CharacterMovements:
     def updateDirection(self, direction):
         if self.status["oldDirection"] == direction:
             return ""
-        if direction in self.status["allDirections"]:
+        if direction in self.directions:
             self.status["oldDirection"] = self.status["direction"]
             self.status["direction"] = direction
             self.updateSkins()

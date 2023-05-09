@@ -1,4 +1,4 @@
-from src.utils.classes.characterMovements import CharacterMovements
+from utils.classes.movements import CharacterMovements
 
 class Character(CharacterMovements):
     def __init__(self):
