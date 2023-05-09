@@ -1,2 +1,4 @@
 Github is lagging and idk if my git is synced anymore!
 So this file is just to idk
+
+Okay so it fails to push/pull, is github alright?
