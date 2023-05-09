@@ -76,7 +76,6 @@ class Player(Character):
             self.status[f"{animationName}"]["frames"]["current"] = round(currentFrame + animation["frames"]["speed"], 2)
 
         if animation["frames"]["current"] % 1 == 0:
-            print("animate")
             if self.status["direction"] == "right":
                 self.playerSurface = animationSkin.subsurface(
                     (self.status[f"{animationName}"]["frames"]["current"] * self.status[f"{animationName}"]["dimensions"]["width"], 0, self.status[f"{animationName}"]["dimensions"]["width"], self.status[f"{animationName}"]["dimensions"]["height"]))

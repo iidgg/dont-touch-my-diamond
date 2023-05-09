@@ -47,7 +47,6 @@ class CharacterMovements:
             self.updateSkins()
 
     def updateSkins(self):
-        print("update started")
         for e in self.AI:  # e Stands for element
             eSplitted = e.split()
             name = eSplitted[0]
@@ -82,5 +81,3 @@ class CharacterMovements:
                     "height": skin["index"].get_height()
                 }
             }
-        print("update Finished")
-        print(self.status["oldDirection"])
