@@ -28,3 +28,5 @@ Investigating - We are investigating reports of degraded performance for Git Ope
 May 09, 2023 - 11:32 UTC
 
 Waiting...
+
+Okay so its been 1.5 Hours, it seems like github is coming back..
