@@ -2,3 +2,29 @@ Github is lagging and idk if my git is synced anymore!
 So this file is just to idk
 
 Okay so it fails to push/pull, is github alright?
+
+ughh!
+ ! [remote rejected] master -> master (failure)
+error: failed to push some refs to 'https://github.com/iidgg/dont-touch-my-diamond.git'
+
+So in github status they say:
+Update - Git Operations is now experiencing degraded availability. We are continuing to investigate.
+May 09, 2023 - 12:05 UTC
+Update - Actions is now experiencing degraded availability. We are still investigating and will provide an update when we have one.
+May 09, 2023 - 12:04 UTC
+Update - Issues is now experiencing degraded availability. We are still investigating and will provide an update when we have one.
+May 09, 2023 - 12:03 UTC
+Update - Pull Requests is experiencing degraded performance. We are still investigating and will provide an update when we have one.
+May 09, 2023 - 11:59 UTC
+Update - Pages is experiencing degraded performance. We are still investigating and will provide an update when we have one.
+May 09, 2023 - 11:55 UTC
+Update - API Requests is experiencing degraded performance. We are still investigating and will provide an update when we have one.
+May 09, 2023 - 11:45 UTC
+Update - Actions is experiencing degraded performance. We are still investigating and will provide an update when we have one.
+May 09, 2023 - 11:41 UTC
+Update - Issues is experiencing degraded performance. We are continuing to investigate.
+May 09, 2023 - 11:36 UTC
+Investigating - We are investigating reports of degraded performance for Git Operations.
+May 09, 2023 - 11:32 UTC
+
+Waiting...
