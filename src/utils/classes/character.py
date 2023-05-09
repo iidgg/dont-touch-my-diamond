@@ -25,7 +25,7 @@ class Character(Object):
         keys = pygame.key.get_pressed()
         self.position["old"]["x"], self.position["old"]["y"] = self.position["x"], self.position["y"]
 
-        # TODO: Bruh bro! the player can go off down screen
+        # TODO: Bruh bro! the player CAN go off down screen
         # Check if the player is about to go off screen.
         if self.position["x"] < 0:
             self.position["x"] = 0
