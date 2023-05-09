@@ -25,6 +25,8 @@ class Object:
         }
 
         self.updateSkins()
+        # TODO: Delete the hardcoding here
+        self.surface = self.status["walking"]["skin"]["index"]
 
     def getSkin(self, animation, isIndex):
         if not animation:
@@ -81,3 +83,38 @@ class Object:
                     "height": skin["index"].get_height()
                 }
             }
+
+    def animate(self, animation):
+        if not animation in self.animations:
+            return "Invalid animation"
+        
+        animationDict = self.status[f"{animation}"]
+        animationFrames = animationDict["frames"]
+        animationSkin = animationDict["skin"]["animated"]
+        animationSpeed = animationFrames["speed"]
+        totalFrames = animationFrames["total"]["count"]
+        currentFrame = animationFrames["current"]
+        direction = self.status["direction"]
+        dimensions = animationDict["dimensions"]
+        width, height = dimensions["width"], dimensions["height"]
+
+        if currentFrame >= (totalFrames - animationSpeed):
+            # Reset frames to zero if we reached the last frame
+            self.status[f"{animation}"]["frames"]["current"] = 0
+            print("REset")
+        else:
+            # Increase the count to reach closer to the next frame
+            self.status[f"{animation}"]["frames"]["current"] = round(currentFrame + animationSpeed, 2)
+        
+        print(self.status[f"{animation}"]["frames"]["current"])
+        currentFrame = self.status[f"{animation}"]["frames"]["current"] # Update the var
+        if currentFrame % 1 == 0:
+            if direction == self.directions[0]:
+                # if the current direction is right
+                self.surface = animationSkin.subsurface(currentFrame * width, 0, width, height)
+            else:
+                n = totalFrames - currentFrame
+                if n == totalFrames:
+                    n = 0
+
+                self.surface = animation.subsurface(n * width, 0, width, height)
