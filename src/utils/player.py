@@ -16,23 +16,20 @@ class Player(Character):
 
     def movePlayer(self):
         keys = pygame.key.get_pressed()
-        self.playerOldPOS["x"] = self.playerPOS.x
-        self.playerOldPOS["y"] = self.playerPOS.y
+        self.playerOldPOS["x"], self.playerOldPOS["y"] = self.playerPOS.x, self.playerPOS.y
 
+        # TODO: Bruh bro! the player can go off down screen
         # Check if the player is about to go off screen.
         if self.playerPOS.x < 0:
             self.playerPOS.x = 0
         elif self.playerPOS.x >= C.screen["width"] - self.status["walking"]["dimensions"]["width"]:
-            self.playerPOS.x = C.screen["width"] - \
-                self.status["walking"]["dimensions"]["width"]
+            self.playerPOS.x = C.screen["width"] - self.status["walking"]["dimensions"]["width"]
             
-
-        # TODO: Bruh bro! the player can go off screen down
         if self.playerPOS.y < 0:
             self.playerPOS.y = 0
         elif self.playerPOS.y >= C.screen["width"] - self.status["walking"]["dimensions"]["height"]:
-            self.playerPOS.y = C.screen["width"] - \
-                self.status["walking"]["dimensions"]["height"]
+            self.playerPOS.y = C.screen["width"] - self.status["walking"]["dimensions"]["height"]
+        # TODO: Ends the last todo, the code down there doesn't have anything to do with this bug
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.playerPOS.y -= self.status["walking"]["speed"]
@@ -64,29 +61,29 @@ class Player(Character):
 
         return self.playerSurface
 
-    def animate(self, animation):
-        if not animation in self.animations:
+    def animate(self, animationName):
+        if not animationName in self.animations:
             return "Bruh bro"
 
-        animation = self.status["walking"]
+        animation = self.status[f"{animationName}"]
         animationFrames = animation["frames"]["total"]["count"]
+        currentFrame = animation["frames"]["current"]
         animationSkin = animation["skin"]["animated"]
-        currentFrame = self.status["walking"]["frames"]["current"]
 
-        if currentFrame >= (animationFrames - self.status["walking"]["speed"]):
-            self.status["walking"]["frames"]["current"] = 0
+        if currentFrame >= (animationFrames - self.status[f"{animationName}"]["speed"]):
+            self.status[f"{animationName}"]["frames"]["current"] = 0
         else:
-            self.status["walking"]["frames"]["current"] = round(currentFrame + self.status["walking"]["frames"]["speed"], 2)
+            self.status[f"{animationName}"]["frames"]["current"] = round(currentFrame + animation["frames"]["speed"], 2)
 
-        if self.status["walking"]["frames"]["current"] % 1 == 0:
+        if animation["frames"]["current"] % 1 == 0:
             print("animate")
             if self.status["direction"] == "right":
                 self.playerSurface = animationSkin.subsurface(
-                    (self.status["walking"]["frames"]["current"] * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["height"]))
+                    (self.status[f"{animationName}"]["frames"]["current"] * self.status[f"{animationName}"]["dimensions"]["width"], 0, self.status[f"{animationName}"]["dimensions"]["width"], self.status[f"{animationName}"]["dimensions"]["height"]))
             else:
-                n = (animationFrames - self.status["walking"]["frames"]["current"])
+                n = (animationFrames - self.status[f"{animationName}"]["frames"]["current"])
                 if n == animationFrames:
                     n = 0
 
                 self.playerSurface = animationSkin.subsurface(
-                    n * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["width"])
+                    n * self.status[f"{animationName}"]["dimensions"]["width"], 0, self.status[f"{animationName}"]["dimensions"]["width"], self.status[f"{animationName}"]["dimensions"]["width"])
