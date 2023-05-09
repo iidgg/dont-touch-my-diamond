@@ -20,8 +20,8 @@ while running:
 
     screen.fill("blue") # Fill the screen with blue.
 
-    playerUpdated = player.updateAllPlayerIntents()
-    screen.blit(playerUpdated, player.playerPOS)
+    playerUpdated = player.updateAllIntents()
+    screen.blit(playerUpdated, (player.position["x"], player.position["y"]))
 
     pygame.display.flip() # Flip to next frame
     clock.tick(60) # Wait for 1/60th of a second.

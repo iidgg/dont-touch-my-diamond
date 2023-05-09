@@ -28,6 +28,10 @@ class Object:
         # TODO: Delete the hardcoding here
         self.surface = self.status["walking"]["skin"]["index"]
 
+        # Create a variable to store the player's position.
+        self.position = {"x": 0, "y": 0, "old": {"x": 0, "y": 0}}
+
+
     def getSkin(self, animation, isIndex):
         if not animation:
             return 1
