@@ -40,10 +40,20 @@ class Player(Character):
             self.playerPOS.y += self.status["walking"]["speed"]
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.playerPOS.x -= self.status["walking"]["speed"]
-            self.updateDirection("left")
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.playerPOS.x += self.status["walking"]["speed"]
-            self.updateDirection("right")
+
+        if not (self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y):
+            if not self.playerOldPOS["y"] == self.playerPOS.y:
+                # Moved up or down
+                ""
+            else:
+                if self.playerPOS.x - 0.5 == self.playerOldPOS["x"]:
+                    "Moved right"
+                    self.updateDirection("right")
+                elif self.playerPOS.x + 0.5 == self.playerOldPOS["x"]:
+                    "Moved left"
+                    self.updateDirection("left")
 
     def updateAllPlayerIntents(self):
         self.movePlayer()
@@ -67,12 +77,10 @@ class Player(Character):
             self.status["walking"]["frames"]["current"] = 0
         else:
             self.status["walking"]["frames"]["current"] = round(currentFrame + self.status["walking"]["frames"]["speed"], 2)
-            print(self.status["walking"]["frames"]["current"])
 
         if self.status["walking"]["frames"]["current"] % 1 == 0:
             print("animate")
             if self.status["direction"] == "right":
-                print((self.status["walking"]["frames"]["current"] * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["height"]))
                 self.playerSurface = animationSkin.subsurface(
                     (self.status["walking"]["frames"]["current"] * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["height"]))
             else:

@@ -39,12 +39,15 @@ class CharacterStatuses:
         return s
 
     def updateDirection(self, direction):
-        if direction in self.status["allDirections"] and not self.status["oldDirection"] == direction:
+        if self.status["oldDirection"] == direction:
+            return ""
+        if direction in self.status["allDirections"]:
             self.status["oldDirection"] = self.status["direction"]
             self.status["direction"] = direction
             self.updateSkins()
 
     def updateSkins(self):
+        print("update started")
         for e in self.AI:  # e Stands for element
             eSplitted = e.split()
             name = eSplitted[0]
@@ -79,3 +82,5 @@ class CharacterStatuses:
                     "height": skin["index"].get_height()
                 }
             }
+        print("update Finished")
+        print(self.status["oldDirection"])
