@@ -16,6 +16,7 @@ class CharacterStatuses:
 
         self.status = {
             # Player direction
+            "oldDirection": "",
             "direction": "right",  # Is player facing left or right?
             "allDirections": ["right", "left"],
 
@@ -38,7 +39,8 @@ class CharacterStatuses:
         return s
 
     def updateDirection(self, direction):
-        if direction in self.status["allDirections"]:
+        if direction in self.status["allDirections"] and not self.status["oldDirection"] == direction:
+            self.status["oldDirection"] = self.status["direction"]
             self.status["direction"] = direction
             self.updateSkins()
 
@@ -65,11 +67,12 @@ class CharacterStatuses:
                 },
                 "frames": {
                     "total": {
-                        "count": float(eSplitted[2]),
+                        "count": skin["animated"].get_width() / skin["index"].get_width(), # TODO
                         "width": skin["animated"].get_width()
                     },
                     "width": 0,
-                    "current": 0
+                    "current": 0,
+                    "speed": float(eSplitted[1])
                 },
                 "dimensions": {
                     "width": skin["index"].get_width(),

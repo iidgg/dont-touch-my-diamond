@@ -53,36 +53,40 @@ class Player(Character):
     def updateAllPlayerIntents(self):
         self.movePlayer()
 
-        # if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
-        #     if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.status["walking"]["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.status["walking"]["speed"])):
-        #         self.animate("walking")
+        if not self.playerOldPOS["x"] == self.playerPOS.x and self.playerOldPOS["y"] == self.playerPOS.y:
+            if ((self.playerPOS.x - self.playerOldPOS["x"]) == self.status["walking"]["speed"]) or (abs(self.playerPOS.x - self.playerOldPOS["x"]) == abs(self.status["walking"]["speed"])):
+                self.animate("walking")
 
         return self.playerSurface
     
     # TODO: And this crap too needs to move the fuck out of here
 
-    # def animate(self, animation):
-    #     if not animation in self.animations:
-    #         return "Bruh bro"
+    def animate(self, animation):
+        if not animation in self.animations:
+            return "Bruh bro"
 
-    #     animation = self.__dict__[animation]
-    #     animationFrames = animation["frames"]
-    #     animationSkin = animation["skin"]
+        animation = self.status["walking"]
+        animationFrames = animation["frames"]["total"]["count"]
+        animationSkin = animation["skin"]["animated"]
+        currentFrame = self.status["walking"]["frames"]["current"]
 
-    #     if self.animation["frame"] >= (animationFrames - self.animation["speed"]):
-    #         self.animation["frame"] = 0
-    #     else:
-    #         self.animation["frame"] = round(
-    #             self.animation["frame"] + self.animation["speed"], 2)
+        if currentFrame >= (animationFrames - self.status["walking"]["speed"]):
+            self.status["walking"]["frames"]["current"] = 0
+            print("reset")
+        else:
+            self.status["walking"]["frames"]["current"] = round(currentFrame + self.status["walking"]["frames"]["speed"], 2)
+            print("plus")
+            print(self.status["walking"]["frames"]["current"])
 
-    #     if self.animation["frame"] % 1 == 0:
-    #         if self.status["direction"] == "right":
-    #             self.playerSurface = animationSkin.subsurface(
-    #                 (self.animation["frame"] * self.frame["width"], 0, self.frame["width"], self.frame["height"]))
-    #         else:
-    #             n = (animationFrames - self.animation["frame"])
-    #             if n == animationFrames:
-    #                 n = 0
+        #TODO: Figure out what does that do and fix it
+        # if self.status["walking"]["frames"]["current"] % 1 == 0:
+        #     if self.status["direction"] == "right":
+        #         self.playerSurface = animationSkin.subsurface(
+        #             (self.status["walking"]["frames"]["current"] * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["height"]))
+        #     else:
+        #         n = (animationFrames - self.status["walking"]["frames"]["current"])
+        #         if n == animationFrames:
+        #             n = 0
 
-    #             self.playerSurface = animationSkin.subsurface(
-    #                 n * self.frame["width"], 0, self.frame["width"], self.frame["height"])
+        #         self.playerSurface = animationSkin.subsurface(
+        #             n * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["width"])
