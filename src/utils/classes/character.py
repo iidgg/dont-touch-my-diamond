@@ -47,10 +47,12 @@ class Character(Object):
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.position["x"] += self.status["walking"]["speed"]
 
+        self.followMovements()
+
+    def followMovements(self):
         if not (self.position["old"]["x"] == self.position["x"] and self.position["old"]["y"] == self.position["y"]):
             if not self.position["old"]["y"] == self.position["y"]:
-                # Moved up or down
-                ""
+                "Moved up or down"
             else:
                 if self.position["x"] - 0.5 == self.position["old"]["x"]:
                     "Moved right"
