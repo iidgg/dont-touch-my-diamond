@@ -16,7 +16,7 @@ class Character(Object):
         walkingSpeed = self.status["walking"]["speed"]
 
         if not isOldXisNewX and isOldYisNewY:
-            if ((newX - oldX) == walkingSpeed) or (abs(newX - oldX) == abs(walkingSpeed)):
+            if abs(newX - oldX) == abs(walkingSpeed):
                 self.animate("walking")
 
         return self.surface
