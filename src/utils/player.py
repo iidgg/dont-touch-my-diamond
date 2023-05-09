@@ -11,6 +11,9 @@ class Player(Character):
         self.playerPOS = pygame.Vector2(x, y)
         self.playerOldPOS = {"x": 0, "y": 0}
 
+        # Player initialize
+        self.playerSurface = self.status["walking"]["skin"]["index"]
+
     def movePlayer(self):
         keys = pygame.key.get_pressed()
         self.playerOldPOS["x"], self.playerOldPOS["y"] = self.playerPOS.x, self.playerPOS.y

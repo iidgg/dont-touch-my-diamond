@@ -101,20 +101,18 @@ class Object:
         if currentFrame >= (totalFrames - animationSpeed):
             # Reset frames to zero if we reached the last frame
             self.status[f"{animation}"]["frames"]["current"] = 0
-            print("REset")
         else:
             # Increase the count to reach closer to the next frame
             self.status[f"{animation}"]["frames"]["current"] = round(currentFrame + animationSpeed, 2)
         
-        print(self.status[f"{animation}"]["frames"]["current"])
         currentFrame = self.status[f"{animation}"]["frames"]["current"] # Update the var
         if currentFrame % 1 == 0:
             if direction == self.directions[0]:
                 # if the current direction is right
                 self.surface = animationSkin.subsurface(currentFrame * width, 0, width, height)
             else:
-                n = totalFrames - currentFrame
+                n = (totalFrames - currentFrame)
                 if n == totalFrames:
                     n = 0
-
-                self.surface = animation.subsurface(n * width, 0, width, height)
+                
+                self.surface = animationSkin.subsurface(n * width, 0, width, height)
