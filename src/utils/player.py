@@ -2,11 +2,8 @@ import pygame
 import src.constants as C
 from src.utils.character import Character
 
-# TODO: in short just clean the fucking code bro
 class Player(Character):
     def __init__(self, x, y, speed):
-        # TODO: Move this crap out to either Character class or else
-
         # Initialize the extended classes
         super().__init__()
 
@@ -18,8 +15,6 @@ class Player(Character):
         self.playerSurface = self.status["walking"]["skin"]["index"]
 
     def movePlayer(self):
-        self.playerSurface = self.status["walking"]["skin"]["index"]
-
         keys = pygame.key.get_pressed()
         self.playerOldPOS["x"] = self.playerPOS.x
         self.playerOldPOS["y"] = self.playerPOS.y
@@ -58,8 +53,6 @@ class Player(Character):
                 self.animate("walking")
 
         return self.playerSurface
-    
-    # TODO: And this crap too needs to move the fuck out of here
 
     def animate(self, animation):
         if not animation in self.animations:
@@ -72,21 +65,20 @@ class Player(Character):
 
         if currentFrame >= (animationFrames - self.status["walking"]["speed"]):
             self.status["walking"]["frames"]["current"] = 0
-            print("reset")
         else:
             self.status["walking"]["frames"]["current"] = round(currentFrame + self.status["walking"]["frames"]["speed"], 2)
-            print("plus")
             print(self.status["walking"]["frames"]["current"])
 
-        #TODO: Figure out what does that do and fix it
-        # if self.status["walking"]["frames"]["current"] % 1 == 0:
-        #     if self.status["direction"] == "right":
-        #         self.playerSurface = animationSkin.subsurface(
-        #             (self.status["walking"]["frames"]["current"] * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["height"]))
-        #     else:
-        #         n = (animationFrames - self.status["walking"]["frames"]["current"])
-        #         if n == animationFrames:
-        #             n = 0
+        if self.status["walking"]["frames"]["current"] % 1 == 0:
+            print("animate")
+            if self.status["direction"] == "right":
+                print((self.status["walking"]["frames"]["current"] * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["height"]))
+                self.playerSurface = animationSkin.subsurface(
+                    (self.status["walking"]["frames"]["current"] * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["height"]))
+            else:
+                n = (animationFrames - self.status["walking"]["frames"]["current"])
+                if n == animationFrames:
+                    n = 0
 
-        #         self.playerSurface = animationSkin.subsurface(
-        #             n * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["width"])
+                self.playerSurface = animationSkin.subsurface(
+                    n * self.status["walking"]["dimensions"]["width"], 0, self.status["walking"]["dimensions"]["width"], self.status["walking"]["dimensions"]["width"])
