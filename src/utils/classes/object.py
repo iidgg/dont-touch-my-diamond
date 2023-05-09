@@ -1,6 +1,6 @@
 import pygame
 
-class CharacterMovements:
+class Object:
     def __init__(self):
         # All available animations
         self.animations = a = ["walking", "running"]
