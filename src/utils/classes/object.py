@@ -3,7 +3,7 @@ import pygame
 class Object:
     def __init__(self):
         # All available animations
-        self.animations = a = ["walking", "running"]
+        self.animations = a = ["walking"]
         self.directions = ["right", "left"]
 
         """"
@@ -12,7 +12,7 @@ class Object:
         "AnimationSpeed"
         "Speed * Number = the player speed *Speed = The given speed to the class*"
         """  # With spaces between each
-        self.AI = [f"{a[0]} 0.1 0.5", f"{a[1]} 0.2 1.0"]
+        self.AI = [f"{a[0]} 0.1 0.5"]
         # ^ Animation information
 
         self.status = {
@@ -21,7 +21,7 @@ class Object:
             "direction": "right",  # Is player facing left or right?
 
             # Player skin
-            "skin": "Scar_L_Solider",
+            "skin": "whitish",
         }
 
         self.updateSkins()
