@@ -55,7 +55,7 @@ class Character(Object):
                 "Moved up or down"
             else:
                 if self.position["x"] - 0.5 == self.position["old"]["x"]:
-                    "Moved right"
+                    "Moved right" # TODO: Change the hardcoded 0.5 Up and down
                     self.updateDirection("right")
                 elif self.position["x"] + 0.5 == self.position["old"]["x"]:
                     "Moved left"

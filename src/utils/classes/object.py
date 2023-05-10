@@ -75,7 +75,7 @@ class Object:
                 },
                 "frames": {
                     "total": {
-                        "count": skin["animated"].get_width() / skin["index"].get_width(), # TODO
+                        "count": skin["animated"].get_width() / skin["index"].get_width(), # ? This was a todo, i guess its done?
                         "width": skin["animated"].get_width()
                     },
                     "width": 0,
