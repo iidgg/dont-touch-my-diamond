@@ -1,5 +1,5 @@
 screen = {"width": 1080, "height":  720}  # Define the screen size.
-# ! You need the extension better comments to read this file (:
+# ! You need the extension (better comments) to read this file (:
 msd = { # Mid screen dictionary
     "y": screen["height"] / 2, # Y is the vertical height
     "x": screen["width"] / 2 # X is the horizontal width
