@@ -5,4 +5,4 @@ from src.utils.classes.character import Character
 class Player(Character):
     def __init__(self, x, y, speed):
         # Initialize the extended classes
-        super().__init__()
+        Character.__init__(self)
