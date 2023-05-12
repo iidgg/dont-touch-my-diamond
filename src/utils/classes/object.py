@@ -4,7 +4,7 @@ class Object:
     def __init__(self):
         # All available animations
         self.animations = a = ["walking"]
-        self.directions = ["right", "left"]
+        self.directions = ["right", "left", "up", "down"]
 
         """"
         Structure:

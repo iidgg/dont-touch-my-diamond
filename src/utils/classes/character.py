@@ -53,6 +53,10 @@ class Character(Object):
         if not (self.position["old"]["x"] == self.position["x"] and self.position["old"]["y"] == self.position["y"]):
             if not self.position["old"]["y"] == self.position["y"]:
                 "Moved up or down"
+                if self.position["y"] - 0.5 == self.position["old"]["y"]:
+                    "Moved down"
+                elif self.position["y"] + 0.5 == self.position["old"]["y"]:
+                    "Moved up"
             else:
                 if self.position["x"] - 0.5 == self.position["old"]["x"]:
                     "Moved right" # TODO: Change the hardcoded 0.5 Up and down
