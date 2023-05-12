@@ -60,3 +60,9 @@ class Character(Object):
                 elif self.position["x"] + 0.5 == self.position["old"]["x"]:
                     "Moved left"
                     self.updateDirection("left")
+
+    def render(self, screen, isLatest):
+        if isLatest:
+            self.updateAllIntents()
+        
+        screen.blit(self.surface, (self.position["x"], self.position["y"]))
