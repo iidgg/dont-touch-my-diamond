@@ -21,6 +21,8 @@ while running:
     
     game_canvas = pygame.Surface((C.canvas["width"],C.canvas["height"]))
     game_canvas.fill("blue")
+    grass_img = pygame.image.load("src/images/map/grass.png")
+    game_canvas.blit(grass_img, (0,0))
     player.render(game_canvas, True)
 
     screen.blit(pygame.transform.scale(game_canvas,(C.screen["width"], C.screen["height"])), (0,0))
