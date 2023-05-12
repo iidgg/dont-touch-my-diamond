@@ -1,4 +1,4 @@
-screen = {"width": 1080, "height":  720}  # Define the screen size.
+screen = {"width": 810, "height":  540}  # Define the screen size.
 canvas = {"width": screen["width"] / 2, "height":  screen["height"] / 2}  # Define the screen size.
 # ! You need the extension (better comments) to read this file (:
 msd = { # Mid screen dictionary
