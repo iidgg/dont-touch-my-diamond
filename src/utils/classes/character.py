@@ -18,6 +18,9 @@ class Character(Object):
         if not isOldXisNewX and isOldYisNewY:
             if abs(newX - oldX) == abs(walkingSpeed):
                 self.animate("walking")
+        elif not isOldYisNewY and isOldXisNewX:
+            ""
+            self.animate("walking")
 
         return self.surface
     
@@ -55,8 +58,10 @@ class Character(Object):
                 "Moved up or down"
                 if self.position["y"] - 0.5 == self.position["old"]["y"]:
                     "Moved down"
+                    self.updateDirection("down")
                 elif self.position["y"] + 0.5 == self.position["old"]["y"]:
                     "Moved up"
+                    self.updateDirection("up")
             else:
                 if self.position["x"] - 0.5 == self.position["old"]["x"]:
                     "Moved right" # TODO: Change the hardcoded 0.5 Up and down
