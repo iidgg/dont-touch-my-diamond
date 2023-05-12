@@ -18,10 +18,12 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill("blue") # Fill the screen with blue.
-
-    player.render(screen, True)
     
+    game_canvas = pygame.Surface((C.canvas["width"],C.canvas["height"]))
+    game_canvas.fill("blue")
+    player.render(game_canvas, True)
+
+    screen.blit(pygame.transform.scale(game_canvas,(C.screen["width"], C.screen["height"])), (0,0))
 
     pygame.display.flip() # Flip to next frame
     clock.tick(60) # Wait for 1/60th of a second.
