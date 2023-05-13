@@ -143,19 +143,20 @@ class Character(Object):
     
     def updateMovements(self):
         keys = pygame.key.get_pressed()
-        self.pos["ox"], self.pos["oy"] = self.pos["x"], self.pos["y"]
+        # self.pos["ox"], self.pos["oy"] = self.pos["x"], self.pos["y"]
+        self.swapPosition()
 
         # TODO: Bruh bro! the player CAN go off down screen
         # Check if the player is about to go off screen.
         if self.pos["x"] < 0:
-            self.pos["x"] = 0
+            self.setX(0)
         elif self.pos["x"] >= C.screen["width"] - self.status["walking"]["dimensions"]["width"]:
-            self.pos["x"] = C.screen["width"] - self.status["walking"]["dimensions"]["width"]
+            self.setX(C.screen["width"] - self.status["walking"]["dimensions"]["width"])
             
         if self.pos["y"] < 0:
-            self.pos["y"] = 0
+            self.setY(0)
         elif self.pos["y"] >= C.screen["width"] - self.status["walking"]["dimensions"]["height"]:
-            self.pos["y"] = C.screen["width"] - self.status["walking"]["dimensions"]["height"]
+            self.setY(C.screen["width"] - self.status["walking"]["dimensions"]["height"])
         # TODO: Ends the last todo, the code down there doesn't have anything to do with this bug
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:

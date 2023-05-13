@@ -25,4 +25,6 @@ class Object:
     def setX(self, x):
         self.pos["ox"] = self.pos["x"]
         self.pos["x"] = x
-        
+
+    def swapPosition(self):
+        self.setPosition("same", "same")
