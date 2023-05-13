@@ -159,14 +159,15 @@ class Character(Object):
             self.setY(C.screen["width"] - self.status["walking"]["dimensions"]["height"])
         # TODO: Ends the last todo, the code down there doesn't have anything to do with this bug
 
+        ws = self.status["walking"]["speed"] # Walking speed
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.pos["y"] -= self.status["walking"]["speed"]
+            self.changeYby(-ws)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.pos["y"] += self.status["walking"]["speed"]
+            self.changeYby(ws)
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.pos["x"] -= self.status["walking"]["speed"]
+            self.changeXby(-ws)
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.pos["x"] += self.status["walking"]["speed"]
+            self.changeXby(ws)
 
         self.followMovements()
 
