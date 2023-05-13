@@ -1,5 +1,3 @@
-Testing
-
 ## 📰 Credits
 
 ### CDcodes
