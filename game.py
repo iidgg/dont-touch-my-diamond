@@ -12,6 +12,7 @@ running = True # Create a variable to track if the game is running.
 
 player = Player(C.screen["width"] / 2, C.screen["height"] / 2, 0.5)
 
+diamonds = Diamonds()
 while running:
     # Get all events that happened since the last frame.
     for event in pygame.event.get():
@@ -24,7 +25,6 @@ while running:
     grass_img = pygame.image.load("src/images/map/grass.png")
     game_canvas.blit(grass_img, (0,0))
 
-    diamonds = Diamonds()
     diamonds.spawnRandom(game_canvas, 5)
 
     player.render(game_canvas, True)
