@@ -4,6 +4,7 @@ from src.utils.classes.object import Object
 
 class Character(Object):
     def __init__(self):
+        Object.__init__(self)
         # All available animations
         self.animations = a = ["walking"]
         self.directions = ["right", "left", "up", "down"]
@@ -31,7 +32,7 @@ class Character(Object):
         self.surface = self.status["walking"]["skin"]["index"]
 
         # Create a variable to store the player's position.
-        self.position = {"x": 0, "y": 0, "old": {"x": 0, "y": 0}}
+        # self.position = {"x": 0, "y": 0, "old": {"x": 0, "y": 0}}
 
     def getSkin(self, animation, isIndex):
         if not animation:
@@ -125,8 +126,8 @@ class Character(Object):
     def updateAllIntents(self):
         self.updateMovements()
 
-        newX, oldX = self.position["x"], self.position["old"]["x"]
-        newY, oldY = self.position["y"], self.position["old"]["y"]
+        newX, oldX = self.pos["x"], self.pos["ox"]
+        newY, oldY = self.pos["y"], self.pos["oy"]
         isOldXisNewX =  newX == oldX
         isOldYisNewY = newY == oldY
         walkingSpeed = self.status["walking"]["speed"]
@@ -142,47 +143,47 @@ class Character(Object):
     
     def updateMovements(self):
         keys = pygame.key.get_pressed()
-        self.position["old"]["x"], self.position["old"]["y"] = self.position["x"], self.position["y"]
+        self.pos["ox"], self.pos["oy"] = self.pos["x"], self.pos["y"]
 
         # TODO: Bruh bro! the player CAN go off down screen
         # Check if the player is about to go off screen.
-        if self.position["x"] < 0:
-            self.position["x"] = 0
-        elif self.position["x"] >= C.screen["width"] - self.status["walking"]["dimensions"]["width"]:
-            self.position["x"] = C.screen["width"] - self.status["walking"]["dimensions"]["width"]
+        if self.pos["x"] < 0:
+            self.pos["x"] = 0
+        elif self.pos["x"] >= C.screen["width"] - self.status["walking"]["dimensions"]["width"]:
+            self.pos["x"] = C.screen["width"] - self.status["walking"]["dimensions"]["width"]
             
-        if self.position["y"] < 0:
-            self.position["y"] = 0
-        elif self.position["y"] >= C.screen["width"] - self.status["walking"]["dimensions"]["height"]:
-            self.position["y"] = C.screen["width"] - self.status["walking"]["dimensions"]["height"]
+        if self.pos["y"] < 0:
+            self.pos["y"] = 0
+        elif self.pos["y"] >= C.screen["width"] - self.status["walking"]["dimensions"]["height"]:
+            self.pos["y"] = C.screen["width"] - self.status["walking"]["dimensions"]["height"]
         # TODO: Ends the last todo, the code down there doesn't have anything to do with this bug
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.position["y"] -= self.status["walking"]["speed"]
+            self.pos["y"] -= self.status["walking"]["speed"]
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-            self.position["y"] += self.status["walking"]["speed"]
+            self.pos["y"] += self.status["walking"]["speed"]
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.position["x"] -= self.status["walking"]["speed"]
+            self.pos["x"] -= self.status["walking"]["speed"]
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.position["x"] += self.status["walking"]["speed"]
+            self.pos["x"] += self.status["walking"]["speed"]
 
         self.followMovements()
 
     def followMovements(self):
-        if not (self.position["old"]["x"] == self.position["x"] and self.position["old"]["y"] == self.position["y"]):
-            if not self.position["old"]["y"] == self.position["y"]:
+        if not (self.pos["ox"] == self.pos["x"] and self.pos["oy"] == self.pos["y"]):
+            if not self.pos["oy"] == self.pos["y"]:
                 "Moved up or down"
-                if self.position["y"] - 0.5 == self.position["old"]["y"]:
+                if self.pos["y"] - 0.5 == self.pos["oy"]:
                     "Moved down"
                     self.updateDirection("down")
-                elif self.position["y"] + 0.5 == self.position["old"]["y"]:
+                elif self.pos["y"] + 0.5 == self.pos["oy"]:
                     "Moved up"
                     self.updateDirection("up")
             else:
-                if self.position["x"] - 0.5 == self.position["old"]["x"]:
+                if self.pos["x"] - 0.5 == self.pos["ox"]:
                     "Moved right" # TODO: Change the hardcoded 0.5 Up and down
                     self.updateDirection("right")
-                elif self.position["x"] + 0.5 == self.position["old"]["x"]:
+                elif self.pos["x"] + 0.5 == self.pos["ox"]:
                     "Moved left"
                     self.updateDirection("left")
 
@@ -190,4 +191,4 @@ class Character(Object):
         if isLatest:
             self.updateAllIntents()
         
-        screen.blit(self.surface, (self.position["x"], self.position["y"]))
+        screen.blit(self.surface, (self.pos["x"], self.pos["y"]))
