@@ -28,3 +28,9 @@ class Object:
 
     def swapPosition(self):
         self.setPosition("same", "same")
+
+    def changeXby(self, by):
+        self.setX(self.pos["x"] + by)
+    
+    def changeYby(self, by):
+        self.setY(self.pos["y"] + by)
