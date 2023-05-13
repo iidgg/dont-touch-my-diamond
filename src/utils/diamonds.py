@@ -10,13 +10,12 @@ class Diamonds(Object):
 
         self.allDiamonds = []
 
-    def spawnRandom(self, screen, count):
+    def generateDiamonds(self, screen, count):
         for i in range(count):
             x = random.randint(0, screen.get_width())
             y = random.randint(0, screen.get_height())
             diamond = pygame.Rect(x, y, self.skin.get_width(), self.skin.get_height())
 
-            screen.blit(self.skin, diamond)
             self.allDiamonds.append(diamond)
     
     def blitAll(self, screen):

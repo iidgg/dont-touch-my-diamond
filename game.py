@@ -26,7 +26,7 @@ while running:
     game_canvas.blit(grass_img, (0,0))
 
     if len(diamonds.allDiamonds) < 5:
-        diamonds.spawnRandom(game_canvas, 5)
+        diamonds.generateDiamonds(game_canvas, 5)
 
     diamonds.blitAll(game_canvas)
 
