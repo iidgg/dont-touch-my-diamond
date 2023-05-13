@@ -132,11 +132,13 @@ class Character(Object):
         isOldYisNewY = newY == oldY
         walkingSpeed = self.status["walking"]["speed"]
 
-        # TODO: Make sure to animate it when it walks down/right at the same time
         if not isOldXisNewX and isOldYisNewY:
             if abs(newX - oldX) == abs(walkingSpeed):
                 self.animate("walking")
         elif not isOldYisNewY and isOldXisNewX:
+            if abs(newY - oldY) == abs(walkingSpeed):
+                self.animate("walking")
+        elif not isOldYisNewY and not isOldXisNewX:
             if abs(newY - oldY) == abs(walkingSpeed):
                 self.animate("walking")
         
