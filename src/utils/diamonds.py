@@ -18,3 +18,10 @@ class Diamonds(Object):
 
             screen.blit(self.skin, diamond)
             self.allDiamonds.append(diamond)
+    
+    def blitAll(self, screen):
+        for i in range(len(self.allDiamonds)):
+            self.blitOne(screen, i)
+
+    def blitOne(self, screen, index):
+        screen.blit(self.skin, self.allDiamonds[index])

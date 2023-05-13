@@ -25,7 +25,10 @@ while running:
     grass_img = pygame.image.load("src/images/map/grass.png")
     game_canvas.blit(grass_img, (0,0))
 
-    diamonds.spawnRandom(game_canvas, 5)
+    if len(diamonds.allDiamonds) < 5:
+        diamonds.spawnRandom(game_canvas, 5)
+
+    diamonds.blitAll(game_canvas)
 
     player.render(game_canvas, True)
 
