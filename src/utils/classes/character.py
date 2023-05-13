@@ -136,8 +136,9 @@ class Character(Object):
             if abs(newX - oldX) == abs(walkingSpeed):
                 self.animate("walking")
         elif not isOldYisNewY and isOldXisNewX:
-            ""
-            self.animate("walking")
+            if abs(newY - oldY) == abs(walkingSpeed):
+                self.animate("walking")
+        
 
         return self.surface
     
