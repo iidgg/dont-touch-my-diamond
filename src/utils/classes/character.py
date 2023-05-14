@@ -132,7 +132,8 @@ class Character(Object):
         isOldYisNewY = newY == oldY
         walkingSpeed = self.status["walking"]["speed"]
 
-        if not isOldXisNewX and isOldYisNewY:
+        # TODO: this WAS to give us the ability to jump and else, are you still thinking about it?
+        if not isOldXisNewX and isOldYisNewY: 
             if abs(newX - oldX) == abs(walkingSpeed):
                 self.animate("walking")
         elif not isOldYisNewY and isOldXisNewX:
