@@ -20,20 +20,19 @@ class Object(Movements):
         }
 
         self.skin = None
+        self.rect = pygame.rect # TODO
 
     def initializeMovements(self):
         self.isMoveable = True
 
+        self.direction = "right" #? Why right? WHY NOT?
+        self.oldDirection = None
+
     def initializeSkin(self):
         self.hasSkin = True
-        self.skin = {
-            # Player direction
-            "oldDirection": "",
-            "direction": "right",  # Is player facing left or right?
-
-            # Player skin
-            "name": "whitish", # ! Remove hardcode
-        }
+        self.skin = "" # Pygame load something
+        self.skinName = "whitish" # TODO: Remove hardcode
+        
         self.updateSkins()
 
     def updateSkins(self):
