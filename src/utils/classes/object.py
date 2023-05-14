@@ -21,23 +21,18 @@ class Object(Movements):
 
         self.skin = None
 
-    # @classmethod # ! This is A LIE -> Keeps running the below function every time any part of this class get used
-    # def initializeMoveable(self):
-    #     if not hasattr(self, "cats"):
-    #         print("moves")
-    #         def cats(self):
-    #             return self.hasSkin
-    #         setattr(self, "cats", cats)
-    #     ""
+    def initializeMovements(self):
+        self.isMoveable = True
 
     def initializeSkin(self):
+        self.hasSkin = True
         self.skin = {
             # Player direction
             "oldDirection": "",
             "direction": "right",  # Is player facing left or right?
 
             # Player skin
-            "name": "whitish",
+            "name": "whitish", # ! Remove hardcode
         }
         self.updateSkins()
 
