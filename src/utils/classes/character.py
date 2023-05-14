@@ -181,7 +181,14 @@ class Character(Object):
 
     def followMovements(self):
         if not (self.pos["ox"] == self.pos["x"] and self.pos["oy"] == self.pos["y"]):
-            if not self.pos["oy"] == self.pos["y"]:
+            if not self.pos["ox"] == self.pos["x"]:
+                if self.pos["x"] - 0.5 == self.pos["ox"]:
+                    "Moved right" # TODO: Change the hardcoded 0.5 Up and down
+                    self.updateDirection("right")
+                elif self.pos["x"] + 0.5 == self.pos["ox"]:
+                    "Moved left"
+                    self.updateDirection("left")
+            else:
                 "Moved up or down"
                 if self.pos["y"] - 0.5 == self.pos["oy"]:
                     "Moved down"
@@ -189,13 +196,7 @@ class Character(Object):
                 elif self.pos["y"] + 0.5 == self.pos["oy"]:
                     "Moved up"
                     self.updateDirection("up")
-            else:
-                if self.pos["x"] - 0.5 == self.pos["ox"]:
-                    "Moved right" # TODO: Change the hardcoded 0.5 Up and down
-                    self.updateDirection("right")
-                elif self.pos["x"] + 0.5 == self.pos["ox"]:
-                    "Moved left"
-                    self.updateDirection("left")
+
 
     def render(self, screen, isLatest):
         if isLatest:
