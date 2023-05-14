@@ -2,12 +2,13 @@ import pygame
 from src.utils.classes.movements import Movements
 
 class Object(Movements):
-    def __init__(self, hasSkin=False):
-        if not isinstance(hasSkin, bool):
-            pass
+    def __init__(self, hasSkin=False, isMoveable=False):
+        if not isinstance(hasSkin, bool) or not isinstance(isMoveable, bool):
+            return "Nah broda"
 
         Movements.__init__(self)
         self.hasSkin = hasSkin
+        self.isMoveable = isMoveable
 
         self.pos = {
             "x": 0,
