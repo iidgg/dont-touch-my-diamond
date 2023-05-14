@@ -21,7 +21,7 @@ class Object(Movements):
 
         self.skin = None
 
-    # @classmethod # ! This is A LITE -> Keeps running the below function every time any part of this class get used
+    # @classmethod # ! This is A LIE -> Keeps running the below function every time any part of this class get used
     # def initializeMoveable(self):
     #     if not hasattr(self, "cats"):
     #         print("moves")
