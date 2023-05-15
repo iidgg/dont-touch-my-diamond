@@ -42,7 +42,7 @@ class Character(Object):
             ext = "index/"
 
         s = self.status[f"{animation}.skin"] = pygame.image.load(
-            f"src/images/{self.status['skin']}/{animation}/{ext}{self.status['direction']}.png")
+            f"src/images/{self.status['skin']}/{animation}/{ext}{self.direction}.png")
         return s
 
     def updateSkins(self):
