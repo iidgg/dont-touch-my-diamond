@@ -46,14 +46,6 @@ class Character(Object):
             f"src/images/{self.status['skin']}/{animation}/{ext}{self.status['direction']}.png")
         return s
 
-    def updateDirection(self, direction):
-        if self.status["oldDirection"] == direction:
-            return ""
-        if direction in self.directions:
-            self.oldDirection = self.direction
-            self.direction = direction
-            self.updateSkins()
-
     def updateSkins(self):
         for e in self.AI:  # e Stands for element
             eSplitted = e.split()

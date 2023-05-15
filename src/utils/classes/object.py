@@ -28,10 +28,7 @@ class Object(Movements):
         self.rect = pygame.rect # TODO
 
     def initializeMovements(self):
-        self.isMoveable = True
-
-        self.direction = "right" #? Why right? WHY NOT?
-        self.oldDirection = None
+        Movements.__init__(self)
 
     def initializeSkin(self):
         self.hasSkin = True
