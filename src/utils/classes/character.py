@@ -4,7 +4,7 @@ from src.utils.classes.object import Object
 
 class Character(Object):
     def __init__(self):
-        Object.__init__(self)
+        Object.__init__(self, True, True)
         # All available animations
         self.animations = a = ["walking"]
         self.directions = ["right", "left", "up", "down"]
@@ -50,8 +50,8 @@ class Character(Object):
         if self.status["oldDirection"] == direction:
             return ""
         if direction in self.directions:
-            self.status["oldDirection"] = self.status["direction"]
-            self.status["direction"] = direction
+            self.oldDirection = self.direction
+            self.direction = direction
             self.updateSkins()
 
     def updateSkins(self):
@@ -100,7 +100,7 @@ class Character(Object):
         animationSpeed = animationFrames["speed"]
         totalFrames = animationFrames["total"]["count"]
         currentFrame = animationFrames["current"]
-        direction = self.status["direction"]
+        direction = self.direction
         dimensions = animationDict["dimensions"]
         width, height = dimensions["width"], dimensions["height"]
 

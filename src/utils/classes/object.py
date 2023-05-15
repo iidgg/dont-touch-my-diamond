@@ -10,6 +10,11 @@ class Object(Movements):
         self.hasSkin = hasSkin
         self.isMoveable = isMoveable
 
+        if hasSkin:
+            self.initializeMovements()
+        if isMoveable:
+            self.initializeMovements()
+
         self.pos = {
             "x": 0,
             "y": 0,
