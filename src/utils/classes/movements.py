@@ -2,6 +2,7 @@ class Movements():
     def __init__(self):
         self.isMoveable = True
 
+        self.directions = ["right", "left", "up", "down"]
         self.direction = "right" #? Why right? WHY NOT?
         self.oldDirection = None
 

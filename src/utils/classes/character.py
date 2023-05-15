@@ -7,7 +7,6 @@ class Character(Object):
         Object.__init__(self, True, True)
         # All available animations
         self.animations = a = ["walking"]
-        self.directions = ["right", "left", "up", "down"]
 
         """"
         Structure:
