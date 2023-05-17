@@ -5,6 +5,7 @@ class SM():
     def __init__(self):
         self.isMoveable = True
         self.animations = a = ["walking"]
+        
 
         """"
         Structure:
@@ -14,10 +15,17 @@ class SM():
         """  # With spaces between each
         self.AI = [f"{a[0]} 0.1 0.5"]
         # ^ Animation information
+        self.skinName = "arashi"
+        self.currentSkin = None
+        self.skins = {}
+        self.rect = pygame.rect # TODO
+
+
 
         self.directions = ["right", "left", "up", "up-right", "up-left", "down", "down-right", "down-left"]
         self.direction = "right" #? Why right? WHY NOT?
         self.oldDirection = None
+        self.updateSkins()
 
         self.pos = {
             "x": 0,
