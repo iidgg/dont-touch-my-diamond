@@ -17,6 +17,6 @@ class Skin(Movements):
 
         self.hasSkin = True
         self.skin = "" # Pygame load something
-        self.skinName = "whitish" # TODO: Remove hardcode
+        self.skinName = "arashi" # TODO: Remove hardcode
         
         self.updateSkins()

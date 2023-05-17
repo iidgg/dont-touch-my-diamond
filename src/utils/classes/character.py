@@ -23,7 +23,7 @@ class Character(Object):
             "direction": "right",  # Is player facing left or right?
 
             # Player skin
-            "skin": "whitish",
+            "skin": "arashi",
         }
 
         self.updateSkins()
