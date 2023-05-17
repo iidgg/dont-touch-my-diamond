@@ -16,13 +16,6 @@ class Object(SM):
     def initializeSM(self):
         SM.__init__(self)
 
-    def initializeSkin(self):
-        self.hasSkin = True
-        self.skin = "" # Pygame load something
-        self.skinName = "whitish" # TODO: Remove hardcode
-        
-        self.updateSkins()
-
     def updateSkins(self):
         for e in self.AI:  # e Stands for element
             eSplitted = e.split()
