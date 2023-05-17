@@ -10,15 +10,6 @@ class Object(SM):
         self.hasSkin = hasSkin
         self.isMoveable = isMoveable
 
-        self.pos = {
-            "x": 0,
-            "y": 0,
-            "xy": (0, 0),
-            "ox": 0, # Old x
-            "oy": 0, # Old y
-            "oxy": (0, 0) # Old x and y
-        }
-
         self.skin = None
         self.rect = pygame.rect # TODO
 
