@@ -76,3 +76,30 @@ class SM():
             self.changeXby(ws)
 
         self.followMovements()
+
+    def followMovements(self):
+        # Calculate the change in x and y position.
+        dx = self.pos["x"] - self.pos["ox"]
+        dy = self.pos["y"] - self.pos["oy"]
+
+        # Check if the player did not move.
+        if dx == 0 and dy == 0:
+            return
+      
+        # Determine the direction that the player moved to.
+        if dx > 0 and dy == 0:
+            self.updateDirection("right")
+        elif dx < 0 and dy == 0:
+            self.updateDirection("left")
+        elif dx == 0 and dy > 0:
+            self.updateDirection("down")
+        elif dx == 0 and dy < 0:
+            self.updateDirection("up")
+        elif dx > 0 and dy > 0:
+            self.updateDirection("down-right")
+        elif dx < 0 and dy > 0:
+            self.updateDirection("down-left")
+        elif dx > 0 and dy < 0:
+            self.updateDirection("up-right")
+        else:
+            self.updateDirection("up-left")
