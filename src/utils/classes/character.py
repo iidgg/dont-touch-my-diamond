@@ -152,9 +152,9 @@ class Character(Object):
         elif dx < 0 and dy == 0:
             self.updateDirection("left")
         elif dx == 0 and dy > 0:
-            self.updateDirection("up")
-        elif dx == 0 and dy < 0:
             self.updateDirection("down")
+        elif dx == 0 and dy < 0:
+            self.updateDirection("up")
         elif dx > 0 and dy > 0:
             self.updateDirection("down-right")
         elif dx < 0 and dy > 0:
