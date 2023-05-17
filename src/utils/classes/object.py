@@ -1,19 +1,14 @@
 import pygame
-from src.utils.classes.movements import Movements
+from src.utils.classes.SkinAndMovements import SM
 
-class Object(Movements):
+class Object(SM):
     def __init__(self, hasSkin=False, isMoveable=False):
         if not isinstance(hasSkin, bool) or not isinstance(isMoveable, bool):
             return "Nah broda"
 
-        Movements.__init__(self)
+        self.initializeSM()
         self.hasSkin = hasSkin
         self.isMoveable = isMoveable
-
-        if hasSkin:
-            self.initializeMovements()
-        if isMoveable:
-            self.initializeMovements()
 
         self.pos = {
             "x": 0,
@@ -27,8 +22,8 @@ class Object(Movements):
         self.skin = None
         self.rect = pygame.rect # TODO
 
-    def initializeMovements(self):
-        Movements.__init__(self)
+    def initializeSM(self):
+        SM.__init__(self)
 
     def initializeSkin(self):
         self.hasSkin = True
