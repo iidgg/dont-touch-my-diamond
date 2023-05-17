@@ -33,18 +33,6 @@ class Character(Object):
         # Create a variable to store the player's position.
         # self.position = {"x": 0, "y": 0, "old": {"x": 0, "y": 0}}
 
-    def getSkin(self, animation, isIndex):
-        if not animation:
-            return 1
-
-        ext = ""
-        if isIndex:
-            ext = "index/"
-
-        s = self.status[f"{animation}.skin"] = pygame.image.load(
-            f"src/images/{self.status['skin']}/{animation}/{ext}{self.direction}.png")
-        return s
-
     def updateSkins(self):
         for e in self.AI:  # e Stands for element
             eSplitted = e.split()
@@ -136,8 +124,7 @@ class Character(Object):
         
 
         return self.surface
-
-
+    
     def render(self, screen, isLatest):
         if isLatest:
             self.updateAllIntents()
