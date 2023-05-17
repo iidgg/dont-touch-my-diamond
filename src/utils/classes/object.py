@@ -29,42 +29,6 @@ class Object(SM):
         s = self.skins[f"{animation}.skin"] = pygame.image.load(
             f"src/images/{self.skinName}/{animation}/{ext}{self.direction}.png")
         return s
-    
-    def updateSkins(self):
-        for e in self.AI:  # e Stands for element
-            eSplitted = e.split()
-            name = eSplitted[0]
-
-            if not name in self.animations:
-                print("Failed to load animation Named: ", name)
-                return
-
-            skin = {
-                "animated": self.getSkin(name, False),
-                "index": self.getSkin(name, True)
-            }
-
-            self.skin[name] = {
-                # animation speed "how fast do we switch frames"
-                "speed": float(eSplitted[2]),
-                "skin": {
-                    "animated": skin["animated"],
-                    "index": skin["index"]
-                },
-                "frames": {
-                    "total": {
-                        "count": skin["animated"].get_width() / skin["index"].get_width(), # ? This was a todo, i guess its done?
-                        "width": skin["animated"].get_width()
-                    },
-                    "width": 0,
-                    "current": 0,
-                    "speed": float(eSplitted[1])
-                },
-                "dimensions": {
-                    "width": skin["index"].get_width(),
-                    "height": skin["index"].get_height()
-                }
-            }
 
     # def getSkin(self, animation, isIndex):
     #     if not animation:

@@ -4,6 +4,16 @@ import src.constants as C
 class SM():
     def __init__(self):
         self.isMoveable = True
+        self.animations = a = ["walking"]
+
+        """"
+        Structure:
+        "Animation"
+        "AnimationSpeed"
+        "Speed * Number = the player speed *Speed = The given speed to the class*"
+        """  # With spaces between each
+        self.AI = [f"{a[0]} 0.1 0.5"]
+        # ^ Animation information
 
         self.directions = ["right", "left", "up", "up-right", "up-left", "down", "down-right", "down-left"]
         self.direction = "right" #? Why right? WHY NOT?
@@ -49,8 +59,8 @@ class SM():
         # self.pos["ox"], self.pos["oy"] = self.pos["x"], self.pos["y"]
         self.swapPosition()
 
-        walkingWidth = self.status["walking"]["dimensions"]["width"]
-        walkingHeight = self.status["walking"]["dimensions"]["height"]
+        walkingWidth = self.skins["walking"]["dimensions"]["width"]
+        walkingHeight = self.skins["walking"]["dimensions"]["height"]
 
         # TODO: Bruh bro! the player CAN go off down screen
         # Check if the player is about to go off screen.
@@ -65,7 +75,8 @@ class SM():
             self.setY(C.screen["width"] - walkingHeight)
         # TODO: Ends the last todo, the code down there doesn't have anything to do with this bug
 
-        ws = self.status["walking"]["speed"] # Walking speed
+        ws = 0.5
+        # self.status["walking"]["speed"] # Walking speed
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.changeYby(-ws)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
@@ -103,3 +114,39 @@ class SM():
             self.updateDirection("up-right")
         else:
             self.updateDirection("up-left")
+
+    def updateSkins(self):
+        for e in self.AI:  # e Stands for element
+            eSplitted = e.split()
+            name = eSplitted[0]
+
+            if not name in self.animations:
+                print("Failed to load animation Named: ", name)
+                return
+
+            skin = {
+                "animated": self.getSkin(name, False),
+                "index": self.getSkin(name, True)
+            }
+
+            self.skins[name] = {
+                # animation speed "how fast do we switch frames"
+                "speed": float(eSplitted[2]),
+                "skin": {
+                    "animated": skin["animated"],
+                    "index": skin["index"]
+                },
+                "frames": {
+                    "total": {
+                        "count": skin["animated"].get_width() / skin["index"].get_width(), # ? This was a todo, i guess its done?
+                        "width": skin["animated"].get_width()
+                    },
+                    "width": 0,
+                    "current": 0,
+                    "speed": float(eSplitted[1])
+                },
+                "dimensions": {
+                    "width": skin["index"].get_width(),
+                    "height": skin["index"].get_height()
+                }
+            }

@@ -6,16 +6,8 @@ class Character(Object):
     def __init__(self):
         Object.__init__(self, True, True)
         # All available animations
-        self.animations = a = ["walking"]
 
-        """"
-        Structure:
-        "Animation"
-        "AnimationSpeed"
-        "Speed * Number = the player speed *Speed = The given speed to the class*"
-        """  # With spaces between each
-        self.AI = [f"{a[0]} 0.1 0.5"]
-        # ^ Animation information
+
 
         self.status = {
             # Player direction
@@ -28,52 +20,16 @@ class Character(Object):
 
         self.updateSkins()
         # TODO: Delete the hardcoding here
-        self.surface = self.status["walking"]["skin"]["index"]
+        self.surface = self.skins["walking"]["skin"]["index"]
 
         # Create a variable to store the player's position.
         # self.position = {"x": 0, "y": 0, "old": {"x": 0, "y": 0}}
-
-    def updateSkins(self):
-        for e in self.AI:  # e Stands for element
-            eSplitted = e.split()
-            name = eSplitted[0]
-
-            if not name in self.animations:
-                print("Failed to load animation Named: ", name)
-                return
-
-            skin = {
-                "animated": self.getSkin(name, False),
-                "index": self.getSkin(name, True)
-            }
-
-            self.status[name] = {
-                # animation speed "how fast do we switch frames"
-                "speed": float(eSplitted[2]),
-                "skin": {
-                    "animated": skin["animated"],
-                    "index": skin["index"]
-                },
-                "frames": {
-                    "total": {
-                        "count": skin["animated"].get_width() / skin["index"].get_width(), # ? This was a todo, i guess its done?
-                        "width": skin["animated"].get_width()
-                    },
-                    "width": 0,
-                    "current": 0,
-                    "speed": float(eSplitted[1])
-                },
-                "dimensions": {
-                    "width": skin["index"].get_width(),
-                    "height": skin["index"].get_height()
-                }
-            }
 
     def animate(self, animation):
         if not animation in self.animations:
             return "Invalid animation"
         
-        animationDict = self.status[f"{animation}"]
+        animationDict = self.skins[f"{animation}"]
         animationFrames = animationDict["frames"]
         animationSkin = animationDict["skin"]["animated"]
         animationSpeed = animationFrames["speed"]
@@ -85,12 +41,12 @@ class Character(Object):
 
         if currentFrame >= (totalFrames - animationSpeed):
             # Reset frames to zero if we reached the last frame
-            self.status[f"{animation}"]["frames"]["current"] = 0
+            self.skins[f"{animation}"]["frames"]["current"] = 0
         else:
             # Increase the count to reach closer to the next frame
-            self.status[f"{animation}"]["frames"]["current"] = round(currentFrame + animationSpeed, 2)
+            self.skins[f"{animation}"]["frames"]["current"] = round(currentFrame + animationSpeed, 2)
         
-        currentFrame = self.status[f"{animation}"]["frames"]["current"] # Update the var
+        currentFrame = self.skins[f"{animation}"]["frames"]["current"] # Update the var
         if currentFrame % 1 == 0:
             if direction == self.directions[0]:
                 # if the current direction is right
@@ -109,7 +65,8 @@ class Character(Object):
         newY, oldY = self.pos["y"], self.pos["oy"]
         isOldXisNewX =  newX == oldX
         isOldYisNewY = newY == oldY
-        walkingSpeed = self.status["walking"]["speed"]
+        walkingSpeed = 0.5
+        # self.status["walking"]["speed"]
 
         # TODO: this WAS to give us the ability to jump and else, are you still thinking about it?
         if not isOldXisNewX and isOldYisNewY: 
