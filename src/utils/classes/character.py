@@ -171,22 +171,31 @@ class Character(Object):
         self.followMovements()
 
     def followMovements(self):
-        if not (self.pos["ox"] == self.pos["x"] and self.pos["oy"] == self.pos["y"]):
-            if not self.pos["ox"] == self.pos["x"]:
-                if self.pos["x"] - 0.5 == self.pos["ox"]:
-                    "Moved right" # TODO: Change the hardcoded 0.5 Up and down
-                    self.updateDirection("right")
-                elif self.pos["x"] + 0.5 == self.pos["ox"]:
-                    "Moved left"
-                    self.updateDirection("left")
-            else:
-                "Moved up or down"
-                if self.pos["y"] - 0.5 == self.pos["oy"]:
-                    "Moved down"
-                    self.updateDirection("down")
-                elif self.pos["y"] + 0.5 == self.pos["oy"]:
-                    "Moved up"
-                    self.updateDirection("up")
+        # Calculate the change in x and y position.
+        dx = self.pos["x"] - self.pos["ox"]
+        dy = self.pos["y"] - self.pos["oy"]
+
+        # Check if the player did not move.
+        if dx == 0 and dy == 0:
+            return
+      
+        # Determine the direction that the player moved to.
+        if dx > 0 and dy == 0:
+            self.updateDirection("right")
+        elif dx < 0 and dy == 0:
+            self.updateDirection("left")
+        elif dx == 0 and dy > 0:
+            self.updateDirection("up")
+        elif dx == 0 and dy < 0:
+            self.updateDirection("down")
+        elif dx > 0 and dy > 0:
+            self.updateDirection("down-right")
+        elif dx < 0 and dy > 0:
+            self.updateDirection("down-left")
+        elif dx > 0 and dy < 0:
+            self.updateDirection("up-right")
+        else:
+            self.updateDirection("up-left")
 
 
     def render(self, screen, isLatest):
