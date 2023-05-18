@@ -1,7 +1,6 @@
 import pygame
 import src.utils.constants as C
-from src.player import Player
-from src.models.diamonds import Diamonds
+from src.theGame import Player
 
 
 pygame.init() # Initialize Pygame.
@@ -10,8 +9,6 @@ pygame.display.set_caption("Don't touch my diamonds!") # Set the window title.
 clock = pygame.time.Clock() # Create a clock object.
 running = True # Create a variable to track if the game is running.
 
-diamonds = Diamonds()
-allDiamonds = diamonds.allDiamonds
 player = Player(C.screen["width"] / 2, C.screen["height"] / 2, 0.5)
 
 
@@ -22,19 +19,12 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    allDiamonds = diamonds.allDiamonds
     game_canvas = pygame.Surface((C.canvas["width"],C.canvas["height"]))
     game_canvas.fill("blue")
     grass_img = pygame.image.load("src/images/map/grass.png")
     game_canvas.blit(grass_img, (0,0))
 
-    if len(diamonds.allDiamonds) < 5:
-        diamonds.generateDiamonds(game_canvas, 5)
-
-    diamonds.blitAll(game_canvas)
-
-    player.updatePlayer()
-    player.render(game_canvas, False)
+    player.renderPlayer(game_canvas)
 
 
     screen.blit(pygame.transform.scale(game_canvas,(C.screen["width"], C.screen["height"])), (0,0))

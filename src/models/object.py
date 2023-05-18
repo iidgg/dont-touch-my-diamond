@@ -90,7 +90,7 @@ class Object():
     def changeYby(self, by):
         self.setY(self.pos["y"] + by)
 
-    def render(self, screen, isLatest):
+    def render(self, screen, isLatest=False):
         if isLatest:
             self.updateAllIntents()
         
