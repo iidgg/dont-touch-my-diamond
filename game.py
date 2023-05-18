@@ -30,7 +30,8 @@ while running:
 
     diamonds.blitAll(game_canvas)
 
-    player.render(game_canvas, True)
+    player.updatePlayer()
+    player.render(game_canvas, False)
 
 
     screen.blit(pygame.transform.scale(game_canvas,(C.screen["width"], C.screen["height"])), (0,0))
