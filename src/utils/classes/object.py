@@ -4,7 +4,7 @@ from src.utils.classes.SkinAndMovements import SM
 class Object(SM):
     def __init__(self, hasSkin=False, isMoveable=False):
         if not isinstance(hasSkin, bool) or not isinstance(isMoveable, bool):
-            return "Nah broda"
+            return "Missing arguments"
 
         self.initializeSM()
         self.hasSkin = hasSkin
