@@ -16,3 +16,6 @@ class Player(Character):
 
         print(self.pos["x"], self.pos["y"])
         print(self.skins["walking"]["dimensions"])
+
+    def isPlayerTouchingDiamonds(self):
+        ""

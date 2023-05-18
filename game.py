@@ -10,9 +10,11 @@ pygame.display.set_caption("Don't touch my diamonds!") # Set the window title.
 clock = pygame.time.Clock() # Create a clock object.
 running = True # Create a variable to track if the game is running.
 
+diamonds = Diamonds()
+allDiamonds = diamonds.allDiamonds
 player = Player(C.screen["width"] / 2, C.screen["height"] / 2, 0.5)
 
-diamonds = Diamonds()
+
 while running:
     # Get all events that happened since the last frame.
     for event in pygame.event.get():
@@ -20,6 +22,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    allDiamonds = diamonds.allDiamonds
     game_canvas = pygame.Surface((C.canvas["width"],C.canvas["height"]))
     game_canvas.fill("blue")
     grass_img = pygame.image.load("src/images/map/grass.png")
