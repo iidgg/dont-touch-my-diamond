@@ -1,6 +1,6 @@
 import pygame
 import random
-from src.utils.classes.object import Object
+from src.utils.object import Object
 
 class Diamonds(Object):
     def __init__(self):
