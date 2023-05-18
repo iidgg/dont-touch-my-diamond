@@ -1,6 +1,6 @@
 import pygame
 import src.utils.constants as C
-from src.utils.object import Object
+from src.models.object import Object
 
 class Character(Object):
     def __init__(self):

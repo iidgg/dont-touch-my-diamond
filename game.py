@@ -1,7 +1,7 @@
 import pygame
 import src.utils.constants as C
 from src.player import Player
-from src.utils.diamonds import Diamonds
+from src.models.diamonds import Diamonds
 
 
 pygame.init() # Initialize Pygame.
