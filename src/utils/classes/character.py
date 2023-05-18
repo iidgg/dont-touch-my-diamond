@@ -1,5 +1,5 @@
 import pygame
-import src.constants as C
+import src.utils.constants as C
 from src.utils.classes.object import Object
 
 class Character(Object):

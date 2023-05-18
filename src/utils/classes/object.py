@@ -1,5 +1,5 @@
 import pygame
-import src.constants as C
+import src.utils.constants as C
 
 class Object():
     def __init__(self, hasSkin=False, isMoveable=False):

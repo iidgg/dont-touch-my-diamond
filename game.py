@@ -1,6 +1,6 @@
 import pygame
-import src.constants as C
-from src.utils.player import Player
+import src.utils.constants as C
+from src.player import Player
 from src.utils.diamonds import Diamonds
 
 
