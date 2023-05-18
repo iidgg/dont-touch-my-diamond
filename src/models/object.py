@@ -168,18 +168,16 @@ class Object():
         walkingWidth = self.skins["walking"]["dimensions"]["width"]
         walkingHeight = self.skins["walking"]["dimensions"]["height"]
 
-        # TODO: Bruh bro! the player CAN go off down screen
         # Check if the player is about to go off screen.
         if self.pos["x"] < 0:
             self.setX(0)
-        elif self.pos["x"] >= C.screen["width"] - walkingWidth:
-            self.setX(C.screen["width"] - walkingWidth)
+        elif self.pos["x"] >= C.canvas["width"] - walkingWidth:
+            self.setX(C.canvas["width"] - walkingWidth)
             
         if self.pos["y"] < 0:
             self.setY(0)
-        elif self.pos["y"] >= C.screen["width"] - walkingHeight:
-            self.setY(C.screen["width"] - walkingHeight)
-        # TODO: Ends the last todo, the code down there doesn't have anything to do with this bug
+        elif self.pos["y"] >= C.canvas["height"] - walkingHeight:
+            self.setY(C.canvas["height"] - walkingHeight)
 
         ws = 0.5
         # self.status["walking"]["speed"] # Walking speed

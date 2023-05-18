@@ -14,5 +14,5 @@ class Player(Character):
         if touchingDiamonds: 
             ""
 
-        # print(self.pos["x"], self.pos["y"])
-        # print(self.skins["walking"]["dimensions"])
+        print(self.pos["x"], self.pos["y"])
+        print(self.skins["walking"]["dimensions"])
