@@ -33,6 +33,3 @@ class Player(Character):
     # def isPlayerTouchingDiamonds(self, canvas):
     #     ""
     #     self.blitDiamonds(canvas)
-
-    def Dev(self):
-        print(self.pos)
