@@ -1,5 +1,6 @@
 class animatedObject():
     def __init__(self):
+        defaultDirection = "right"
         defaultAnimation = "walking"
 
         self.animations = a = ["walking"]
