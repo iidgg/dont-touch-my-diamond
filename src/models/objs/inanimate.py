@@ -1,3 +1,3 @@
-class animated():
+class inanimate():
     def __init__():
         ""
