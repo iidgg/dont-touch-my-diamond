@@ -20,9 +20,6 @@ class Object():
             "oxy": (0, 0) # Old x and y
         }
 
-        self.hasSkin = hasSkin
-        self.isMoveable = isMoveable
-
         # TODO: Delete the hardcoding here
         self.surface = self.skins["walking"]["skin"]["index"]
 
