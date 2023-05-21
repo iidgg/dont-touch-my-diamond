@@ -25,6 +25,20 @@ class Character(animatedObject):
         keys = pygame.key.get_pressed()
         self.swapPositions()
 
+        walkingWidth = self.skins["walking"]["dimensions"]["width"]
+        walkingHeight = self.skins["walking"]["dimensions"]["height"]
+
+        # Check if the character is about to go off screen.
+        if self.pos.x < 0:
+            self.setX(0)
+        elif self.pos.x >= C.canvas["width"] - walkingWidth:
+            self.setX(C.canvas["width"] - walkingWidth)
+            
+        if self.pos.y < 0:
+            self.setY(0)
+        elif self.pos.y >= C.canvas["height"] - walkingHeight:
+            self.setY(C.canvas["height"] - walkingHeight)
+
         ws = self.movementSpeed # ws = Walking speed
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.changeYby(-ws)
