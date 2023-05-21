@@ -39,13 +39,13 @@ class defaultObj():
     def changeYby(self, by):
         self.setY(self.pos.y + by)
 
-    def render(self, screen, isLatest=False):
-        if isLatest:
-            self.updateAllIntents()
+    # def render(self, screen, isLatest=False):
+    #     if isLatest:
+    #         self.updateAllIntents()
         
-        screen.blit(self.surface, (self.pos.x, self.pos.y))
+    #     screen.blit(self.surface, (self.pos.x, self.pos.y))
     
-    def getSkin():
-        ""
+    # def getSkin():
+    #     ""
 
         
