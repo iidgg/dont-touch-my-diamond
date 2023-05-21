@@ -24,9 +24,6 @@ class Player(Character):
 
         self.blitDiamonds(canvas)
 
-        print(self.pos["x"], self.pos["y"])
-        print(self.skins["walking"]["dimensions"])
-
     def blitDiamonds(self, canvas):
         if len(self.diamonds.allDiamonds) < 5:
             self.diamonds.generateDiamonds(canvas, 5)

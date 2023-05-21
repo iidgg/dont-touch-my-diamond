@@ -11,18 +11,6 @@ class Object():
         self.oldDirection = None
         self.updateSkins()
 
-        self.pos = {
-            "x": 0,
-            "y": 0,
-            "xy": (0, 0),
-            "ox": 0, # Old x
-            "oy": 0, # Old y
-            "oxy": (0, 0) # Old x and y
-        }
-
-        # TODO: Delete the hardcoding here
-        self.surface = self.skins["walking"]["skin"]["index"]
-
     def getSkin(self, animation, isIndex):
         if not animation:
             return 1

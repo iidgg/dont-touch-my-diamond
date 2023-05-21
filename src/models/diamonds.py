@@ -1,10 +1,10 @@
 import pygame
 import random
-from src.models.object import Object
+from src.models.objs.inanimate import inanimateObject
 
-class Diamonds(Object):
+class Diamonds(inanimateObject):
     def __init__(self):
-        Object.__init__(self)
+        inanimateObject.__init__(self)
 
         self.skin = pygame.transform.scale(pygame.image.load("src/images/objects/rewards/diamond.png"), (11.54, 12.5))
 
