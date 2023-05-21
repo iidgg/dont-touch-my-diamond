@@ -24,6 +24,9 @@ class animatedObject(defaultObj):
         self.skins = {}
 
         self.loadSkins()
+        defaultSkin = self.skins[f"{defaultAnimation}"]["skin"]["index"]
+        self.lastSkin = defaultSkin
+        self.lastSkin = self.getSkin()
 
     def render(self, screen, isLatest=False):
         if isLatest:
@@ -31,8 +34,77 @@ class animatedObject(defaultObj):
         
         screen.blit(self.getSkin(), self.pos)
 
-    def getSkin(self):
-        return self.skins["walking"]["skin"]["index"]
+    def followMovements(self):
+        # Calculate the change in x and y position.
+        dx = self.pos.x - self.posOld.x
+        dy = self.pos.y - self.posOld.y
+
+        # Check if the player did not move.
+        if dx == 0 and dy == 0:
+            return
+      
+        # Determine the direction that the player moved to.
+        if dx > 0 and dy == 0:
+            self.updateDirection("right")
+        elif dx < 0 and dy == 0:
+            self.updateDirection("left")
+        elif dx == 0 and dy > 0:
+            self.updateDirection("down")
+        elif dx == 0 and dy < 0:
+            self.updateDirection("up")
+        elif dx > 0 and dy > 0:
+            self.updateDirection("down-right")
+        elif dx < 0 and dy > 0:
+            self.updateDirection("down-left")
+        elif dx > 0 and dy < 0:
+            self.updateDirection("up-right")
+        else:
+            self.updateDirection("up-left")
+
+    def updateDirection(self, direction):
+        if self.direction == direction:
+            return ""
+        if direction in self.directions:
+            self.oldDirection = self.direction
+            self.direction = direction
+            self.reloadSkins()
+
+    def getSkin(self, updateDirection=True):
+        if updateDirection:
+            self.followMovements()
+        detectAnimation = "walking" # TODO: Make a function that detect the animation
+        animationDict = self.skins[f"{detectAnimation}"]
+        animationFrames = animationDict["frames"]
+        animationSkin = animationDict["skin"]["animated"]
+        animationSpeed = animationFrames["speed"]
+        totalFrames = animationFrames["total"]["count"]
+        currentFrame = animationFrames["current"]
+        direction = self.direction
+        dimensions = animationDict["dimensions"]
+        width, height = dimensions["width"], dimensions["height"]
+
+        if currentFrame >= (totalFrames - animationSpeed):
+            # Reset frames to zero if we reached the last frame
+            self.skins[f"{detectAnimation}"]["frames"]["current"] = 0
+        else:
+            # Increase the count to reach closer to the next frame
+            self.skins[f"{detectAnimation}"]["frames"]["current"] = round(currentFrame + animationSpeed, 2)
+        
+        currentFrame = self.skins[f"{detectAnimation}"]["frames"]["current"] # Update the var
+        if currentFrame % 1 == 0:
+            if direction == self.directions[0]:
+                # if the current direction is right
+                self.lastSkin = animationSkin.subsurface(currentFrame * width, 0, width, height)
+                return self.lastSkin
+            else:
+                n = (totalFrames - currentFrame)
+                if n == totalFrames:
+                    n = 0
+
+                self.lastSkin = animationSkin.subsurface(n * width, 0, width, height)
+                return self.lastSkin
+        else:
+            return self.lastSkin
 
     def loadSkin(self, animation, isIndex):
         if not animation:
@@ -45,6 +117,9 @@ class animatedObject(defaultObj):
         s = self.skins[f"{animation}.skin"] = pygame.image.load(
             f"src/images/{self.skinName}/{animation}/{ext}{self.direction}.png")
         return s
+    
+    def reloadSkins(self):
+        self.loadSkins()
     
     def loadSkins(self):
         for e in self.AI:  # e Stands for element
