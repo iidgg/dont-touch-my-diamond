@@ -28,7 +28,7 @@ while running:
 
     player.Dev()
 
-    # player.renderPlayer(game_canvas)
+    player.renderPlayer(game_canvas)
 
     screen.blit(pygame.transform.scale(game_canvas,(C.screen["width"], C.screen["height"])), (0,0))
 

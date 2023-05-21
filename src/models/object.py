@@ -9,18 +9,6 @@ class Object():
         self.oldDirection = None
         self.updateSkins()
 
-    def getSkin(self, animation, isIndex):
-        if not animation:
-            return 1
-
-        ext = ""
-        if isIndex:
-            ext = "index/"
-
-        s = self.skins[f"{animation}.skin"] = pygame.image.load(
-            f"src/images/{self.skinName}/{animation}/{ext}{self.direction}.png")
-        return s
-
     # def getSkin(self, animation, isIndex):
     #     if not animation:
     #         return 1
@@ -32,30 +20,6 @@ class Object():
     #     s = self.skin[f"{animation}.skin"] = pygame.image.load(
     #         f"src/images/{self.skin['skin']}/{animation}/{ext}{self.skin['direction']}.png")
     #     return s
-
-    def updateAllIntents(self):
-        self.updateMovements()
-
-        newX, oldX = self.pos["x"], self.pos["ox"]
-        newY, oldY = self.pos["y"], self.pos["oy"]
-        isOldXisNewX =  newX == oldX
-        isOldYisNewY = newY == oldY
-        walkingSpeed = 0.5
-        # self.status["walking"]["speed"]
-
-        # TODO: this WAS to give us the ability to jump and else, are you still thinking about it?
-        if not isOldXisNewX and isOldYisNewY: 
-            if abs(newX - oldX) == abs(walkingSpeed):
-                self.animate("walking")
-        elif not isOldYisNewY and isOldXisNewX:
-            if abs(newY - oldY) == abs(walkingSpeed):
-                self.animate("walking")
-        elif not isOldYisNewY and not isOldXisNewX:
-            if abs(newY - oldY) == abs(walkingSpeed):
-                self.animate("walking")
-        
-
-        return self.surface
     
     def animate(self, animation):
         if not animation in self.animations:
@@ -155,39 +119,3 @@ class Object():
             self.updateDirection("up-right")
         else:
             self.updateDirection("up-left")
-
-    def updateSkins(self):
-        for e in self.AI:  # e Stands for element
-            eSplitted = e.split()
-            name = eSplitted[0]
-
-            if not name in self.animations:
-                print("Failed to load animation Named: ", name)
-                return
-
-            skin = {
-                "animated": self.getSkin(name, False),
-                "index": self.getSkin(name, True)
-            }
-
-            self.skins[name] = {
-                # animation speed "how fast do we switch frames"
-                "speed": float(eSplitted[2]),
-                "skin": {
-                    "animated": skin["animated"],
-                    "index": skin["index"]
-                },
-                "frames": {
-                    "total": {
-                        "count": skin["animated"].get_width() / skin["index"].get_width(), # ? This was a todo, i guess its done?
-                        "width": skin["animated"].get_width()
-                    },
-                    "width": 0,
-                    "current": 0,
-                    "speed": float(eSplitted[1])
-                },
-                "dimensions": {
-                    "width": skin["index"].get_width(),
-                    "height": skin["index"].get_height()
-                }
-            }
