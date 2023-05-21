@@ -2,24 +2,8 @@ import pygame
 import src.utils.constants as C
 
 class Object():
-    def __init__(self, hasSkin=False, isMoveable=False):
-        if not isinstance(hasSkin, bool) or not isinstance(isMoveable, bool):
-            return "Missing arguments"
-
-        self.isMoveable = True
-        self.animations = a = ["walking"]
-
-        """"
-        Structure:
-        "Animation"
-        "AnimationSpeed"
-        "Speed * Number = the player speed *Speed = The given speed to the class*"
-        """  # With spaces between each
-        self.AI = [f"{a[0]} 0.1 0.5"]
-        # ^ Animation information
-        self.skinName = "arashi"
-        self.currentSkin = None
-        self.skins = {}
+    def __init__(self):
+        self.currentSkin = None # ! Not needed atm
         self.rect = pygame.rect # TODO
 
         self.directions = ["right", "left", "up", "up-right", "up-left", "down", "down-right", "down-left"]

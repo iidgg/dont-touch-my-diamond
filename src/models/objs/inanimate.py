@@ -1,3 +1,3 @@
-class inanimate():
-    def __init__():
-        ""
+class inanimateObject():
+    def __init__(self):
+        self.skin = ""
