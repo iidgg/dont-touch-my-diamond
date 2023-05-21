@@ -83,6 +83,8 @@ class animatedObject(defaultObj):
         dimensions = animationDict["dimensions"]
         width, height = dimensions["width"], dimensions["height"]
 
+        # ! The obj keep animating walking, Probably because you're animating without making sure if he even walked...
+
         if currentFrame >= (totalFrames - animationSpeed):
             # Reset frames to zero if we reached the last frame
             self.skins[f"{detectAnimation}"]["frames"]["current"] = 0
