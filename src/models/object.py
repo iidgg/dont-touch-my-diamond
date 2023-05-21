@@ -6,8 +6,6 @@ class Object():
         self.currentSkin = None # ! Not needed atm
         self.rect = pygame.rect # TODO
 
-        self.directions = ["right", "left", "up", "up-right", "up-left", "down", "down-right", "down-left"]
-        self.direction = "right" #? Why right? WHY NOT?
         self.oldDirection = None
         self.updateSkins()
 

@@ -25,6 +25,9 @@ while running:
             running = False
 
 
+
+    player.Dev()
+
     # player.renderPlayer(game_canvas)
 
     screen.blit(pygame.transform.scale(game_canvas,(C.screen["width"], C.screen["height"])), (0,0))
@@ -33,3 +36,4 @@ while running:
     clock.tick(60) # Wait for 1/60th of a second.
 
 pygame.quit() # Quit Pygame.
+exit() # Exit life.

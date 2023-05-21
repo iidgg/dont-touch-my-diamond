@@ -1,7 +1,13 @@
-class animatedObject():
+from src.models.objs.default import defaultObj
+
+class animatedObject(defaultObj):
     def __init__(self):
+        defaultObj.__init__(self, "arashi") #TODO: NO HARDCODING!
         defaultDirection = "right"
         defaultAnimation = "walking"
+
+        self.directions = ["right", "left", "up", "up-right", "up-left", "down", "down-right", "down-left"]
+        self.direction = defaultDirection #? Why right? WHY NOT?
 
         self.animations = a = ["walking"]
 

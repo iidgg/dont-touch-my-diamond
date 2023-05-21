@@ -6,7 +6,7 @@ from src.models.diamonds import Diamonds
 class Player(Character):
     def __init__(self, x, y, speed):
         # Initialize the extended classes
-        Character.__init__(self)
+        Character.__init__(self, speed)
 
         self.diamonds = diamonds = Diamonds()
         allDiamonds = diamonds.allDiamonds
@@ -33,3 +33,6 @@ class Player(Character):
     # def isPlayerTouchingDiamonds(self, canvas):
     #     ""
     #     self.blitDiamonds(canvas)
+
+    def Dev(self):
+        print(self.pos)
