@@ -12,8 +12,8 @@ class Diamonds(inanimateObject):
 
     def generateDiamonds(self, screen, count):
         for i in range(count):
-            x = random.randint(0, screen.get_width())
-            y = random.randint(0, screen.get_height())
+            x = random.randint(0, screen.get_width() - 15)
+            y = random.randint(0, screen.get_height() - 15) #? 15 So it doesn't spawn out or near the edge
             diamond = pygame.Rect(x, y, self.skin.get_width(), self.skin.get_height())
 
             self.allDiamonds.append(diamond)
