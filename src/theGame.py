@@ -15,6 +15,7 @@ class TheGame():
         self.running = True # Create a variable to track if the game is running.
 
         self.player = Player(C.screen["width"] / 2, C.screen["height"] / 2, 0.5)
+        self.diamonds = Diamonds()
 
         self.gameCanvas = pygame.Surface((C.canvas["width"],C.canvas["height"]))
         self.backgroundImg = pygame.image.load("src/images/map/grass.png")
@@ -23,7 +24,6 @@ class TheGame():
         self.gameCanvas.blit(self.backgroundImg, (0,0))
 
     def loadFrame(self):
-        # frameScaled = 
         self.screen.blit(pygame.transform.scale(self.gameCanvas,(C.screen["width"], C.screen["height"])), (0,0))
 
         pygame.display.flip() # Flip to next frame
@@ -31,6 +31,14 @@ class TheGame():
 
     def updateFrame(self):
         self.initializeNewFrame()
+
+        if len(self.diamonds.allDiamonds) < 1:
+            self.diamonds.generateDiamonds(self.gameCanvas, 1)
+        self.diamonds.blitAll(self.gameCanvas)
+
+        touchingDiamond = self.player.isTouchingRect(self.diamonds.allDiamonds[0])
+        if touchingDiamond:
+            self.diamonds.allDiamonds.remove(self.diamonds.allDiamonds[0])
 
         self.player.movingHandler()
         self.player.render(self.gameCanvas)

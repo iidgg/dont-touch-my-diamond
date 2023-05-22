@@ -1,3 +1,13 @@
 {
-  "cSpell.words": ["arashi", "blit", "colliderect", "pygame"]
+  "cSpell.words": [
+    "arashi",
+    "blit",
+    "bottomleft",
+    "bottomright",
+    "collidepoint",
+    "colliderect",
+    "pygame",
+    "topleft",
+    "topright"
+  ]
 }
