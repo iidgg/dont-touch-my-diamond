@@ -3,6 +3,7 @@ import src.utils.constants as C
 from src.models.character import Character
 from src.models.diamonds import Diamonds
 from src.models.player import Player
+from src.models.ghost import Ghost
 
 
 class TheGame():
@@ -23,6 +24,7 @@ class TheGame():
         self.player = Player(
             C.screen["width"] / 2, C.screen["height"] / 2, 0.5)
         self.diamonds = Diamonds()
+        self.ghost = Ghost()
 
         self.gameCanvas = pygame.Surface(
             (C.canvas["width"], C.canvas["height"]))
@@ -51,6 +53,9 @@ class TheGame():
         if touchingDiamond:
             self.diamonds.allDiamonds.remove(self.diamonds.allDiamonds[0])
             self.score += 1
+
+        self.ghost.follow(self.player.pos)
+        self.ghost.render(self.gameCanvas)
 
         scoreText = pygame.font.Font("src/assets/fonts/main.ttf", 8).render(
             f"Score: {self.score}", True, (255, 255, 255))
