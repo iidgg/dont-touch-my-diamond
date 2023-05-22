@@ -1,4 +1,5 @@
 import pygame
+import time
 import src.utils.constants as C
 from src.models.character import Character
 from src.models.diamonds import Diamonds
@@ -25,6 +26,7 @@ class TheGame():
             C.screen["width"] / 2, C.screen["height"] / 2, 0.5)
         self.diamonds = Diamonds()
         self.ghost = Ghost()
+        self.lastGhostTouch = time.time()
 
         self.gameCanvas = pygame.Surface(
             (C.canvas["width"], C.canvas["height"]))
@@ -57,6 +59,10 @@ class TheGame():
         self.ghost.follow(self.player.pos)
         self.ghost.render(self.gameCanvas)
 
+        if self.player.isTouchingRect(pygame.Rect(self.ghost.pos.x, self.ghost.pos.y, 12, 12)):
+            if not self.isTouchCoolDown():
+                self.recordTouch()
+
         scoreText = pygame.font.Font("src/assets/fonts/main.ttf", 8).render(
             f"Score: {self.score}", True, (255, 255, 255))
         self.gameCanvas.blit(scoreText, (10, 10))
@@ -66,3 +72,13 @@ class TheGame():
 
     def stop(self):
         self.running = False
+
+    def recordTouch(self):
+        self.lastGhostTouch = time.time()
+        self.score -= 1
+
+    def isTouchCoolDown(self):
+        currentTime = time.time()
+        if currentTime - self.lastGhostTouch <= 1:
+            return True
+        return False
