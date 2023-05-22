@@ -1,4 +1,5 @@
 import pygame
+import random
 import src.utils.constants as C
 
 # Set default x and y in the middle of game canvas
@@ -12,8 +13,11 @@ class defaultObj():
         
         self.skinName = skinNameArg
 
-        self.pos = pygame.math.Vector2(x, y)
-        self.posOld = pygame.math.Vector2(x, y)
+        randY = random.randint(20, C.canvas["height"] - 20)
+        randX = random.randint(20, C.canvas["width"] - 20)
+
+        self.pos = pygame.math.Vector2(randX, randY)
+        self.posOld = pygame.math.Vector2(randX, randY)
 
     def setPosition(self, x, y):
         chosenX = x if x != "same" else self.pos.x
