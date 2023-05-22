@@ -12,6 +12,7 @@ class TheGame():
         # Create the screen.
         self.screen = pygame.display.set_mode(
             (C.screen["width"], C.screen["height"]))
+        self.score = 0
         # Set the window title.
         pygame.display.set_caption("Don't touch my diamonds!")
 
@@ -49,9 +50,10 @@ class TheGame():
             self.diamonds.allDiamonds[0])
         if touchingDiamond:
             self.diamonds.allDiamonds.remove(self.diamonds.allDiamonds[0])
+            self.score += 1
 
-        scoreText = pygame.font.SysFont('Arial', 8).render(
-            f"Score: cat", True, (255, 255, 255))
+        scoreText = pygame.font.Font("src/assets/fonts/main.ttf", 8).render(
+            f"Score: {self.score}", True, (255, 255, 255))
         self.gameCanvas.blit(scoreText, (10, 10))
 
         self.player.movingHandler()
