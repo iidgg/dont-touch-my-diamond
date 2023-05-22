@@ -40,6 +40,9 @@ class TheGame():
         if touchingDiamond:
             self.diamonds.allDiamonds.remove(self.diamonds.allDiamonds[0])
 
+        scoreText = pygame.font.SysFont('Arial', 8).render(f"Score: cat", True, (255, 255, 255))
+        self.gameCanvas.blit(scoreText, (10, 10))
+
         self.player.movingHandler()
         self.player.render(self.gameCanvas)
 
