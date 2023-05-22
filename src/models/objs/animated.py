@@ -1,14 +1,16 @@
 import pygame
 from src.models.objs.default import defaultObj
 
+
 class animatedObject(defaultObj):
     def __init__(self):
-        defaultObj.__init__(self, "arashi") #TODO: NO HARDCODING!
+        defaultObj.__init__(self, "arashi")  # TODO: NO HARDCODING!
         defaultDirection = "right"
         defaultAnimation = "walking"
 
-        self.directions = ["right", "left", "up", "up-right", "up-left", "down", "down-right", "down-left"]
-        self.direction = defaultDirection #? Why right? WHY NOT?
+        self.directions = ["right", "left", "up", "up-right",
+                           "up-left", "down", "down-right", "down-left"]
+        self.direction = defaultDirection  # ? Why right? WHY NOT?
 
         self.animations = a = ["walking"]
 
@@ -31,13 +33,13 @@ class animatedObject(defaultObj):
     def render(self, screen, isLatest=False):
         if isLatest:
             self.updateAllIntents()
-        
+
         screen.blit(self.getSkin(), self.pos)
 
     def getSkin(self, updateDirection=True):
         if updateDirection:
             self.followMovements()
-        detectAnimation = "walking" # TODO: Make a function that detect the animation
+        detectAnimation = "walking"  # TODO: Make a function that detect the animation
         animationDict = self.skins[f"{detectAnimation}"]
         animationFrames = animationDict["frames"]
         animationSkin = animationDict["skin"]["animated"]
@@ -53,22 +55,26 @@ class animatedObject(defaultObj):
             self.skins[f"{detectAnimation}"]["frames"]["current"] = 0
         else:
             # Increase the count to reach closer to the next frame
-            self.skins[f"{detectAnimation}"]["frames"]["current"] = round(currentFrame + animationSpeed, 2)
-        
-        currentFrame = self.skins[f"{detectAnimation}"]["frames"]["current"] # Update the var
+            self.skins[f"{detectAnimation}"]["frames"]["current"] = round(
+                currentFrame + animationSpeed, 2)
+
+        # Update the var
+        currentFrame = self.skins[f"{detectAnimation}"]["frames"]["current"]
         if currentFrame % 1 == 0:
             if not self.hasMoved():
                 return self.lastSkin
             if direction == self.directions[0]:
                 # if the current direction is right
-                self.lastSkin = animationSkin.subsurface(currentFrame * width, 0, width, height)
+                self.lastSkin = animationSkin.subsurface(
+                    currentFrame * width, 0, width, height)
                 return self.lastSkin
             else:
                 n = (totalFrames - currentFrame)
                 if n == totalFrames:
                     n = 0
 
-                self.lastSkin = animationSkin.subsurface(n * width, 0, width, height)
+                self.lastSkin = animationSkin.subsurface(
+                    n * width, 0, width, height)
                 return self.lastSkin
         else:
             return self.lastSkin
@@ -82,12 +88,12 @@ class animatedObject(defaultObj):
             ext = "index/"
 
         s = self.skins[f"{animation}.skin"] = pygame.image.load(
-            f"src/images/{self.skinName}/{animation}/{ext}{self.direction}.png")
+            f"src/assets/images/{self.skinName}/{animation}/{ext}{self.direction}.png")
         return s
-    
+
     def reloadSkins(self):
         self.loadSkins()
-    
+
     def loadSkins(self):
         for e in self.AI:  # e Stands for element
             eSplitted = e.split()
@@ -111,7 +117,8 @@ class animatedObject(defaultObj):
                 },
                 "frames": {
                     "total": {
-                        "count": skin["animated"].get_width() / skin["index"].get_width(), # ? This was a todo, i guess its done?
+                        # ? This was a todo, i guess its done?
+                        "count": skin["animated"].get_width() / skin["index"].get_width(),
                         "width": skin["animated"].get_width()
                     },
                     "width": 0,
