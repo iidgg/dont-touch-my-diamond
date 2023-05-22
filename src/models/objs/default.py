@@ -39,6 +39,52 @@ class defaultObj():
     def changeYby(self, by):
         self.setY(self.pos.y + by)
 
+    def hasMoved(self):
+        # Calculate the change in x and y position.
+        dx = self.pos.x - self.posOld.x
+        dy = self.pos.y - self.posOld.y
+
+        # Check if the player did not move.
+        if dx == 0 and dy == 0:
+            return False
+        return True
+
+    def followMovements(self):
+        # Calculate the change in x and y position.
+        dx = self.pos.x - self.posOld.x
+        dy = self.pos.y - self.posOld.y
+
+        # Check if the player did not move.
+        if not self.hasMoved():
+            return
+      
+        # Determine the direction that the player moved to.
+        if dx > 0 and dy == 0:
+            self.updateDirection("right")
+        elif dx < 0 and dy == 0:
+            self.updateDirection("left")
+        elif dx == 0 and dy > 0:
+            self.updateDirection("down")
+        elif dx == 0 and dy < 0:
+            self.updateDirection("up")
+        elif dx > 0 and dy > 0:
+            self.updateDirection("down-right")
+        elif dx < 0 and dy > 0:
+            self.updateDirection("down-left")
+        elif dx > 0 and dy < 0:
+            self.updateDirection("up-right")
+        else:
+            self.updateDirection("up-left")
+
+    def updateDirection(self, direction):
+        if self.direction == direction:
+            return ""
+        if direction in self.directions:
+            self.oldDirection = self.direction
+            self.direction = direction
+            self.reloadSkins()
+
+
     # def render(self, screen, isLatest=False):
     #     if isLatest:
     #         self.updateAllIntents()

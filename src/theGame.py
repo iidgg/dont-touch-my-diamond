@@ -2,34 +2,38 @@ import pygame
 import src.utils.constants as C
 from src.models.character import Character
 from src.models.diamonds import Diamonds
+from src.models.player import Player
 
-class Player(Character):
-    def __init__(self, x, y, speed):
-        # Initialize the extended classes
-        Character.__init__(self, speed)
+class TheGame():
+    def __init__(self):
+        pygame.init() # Initialize Pygame.
 
-        self.diamonds = diamonds = Diamonds()
-        allDiamonds = diamonds.allDiamonds
+        self.screen = pygame.display.set_mode((C.screen["width"], C.screen["height"])) # Create the screen.
+        pygame.display.set_caption("Don't touch my diamonds!") # Set the window title.
 
-    def renderPlayer(self, canvas):
-        # self.updatePlayer(canvas)
-        self.render(canvas)
-        
-    def updatePlayer(self, canvas):
-        self.updateAllIntents()
-        touchingDiamonds = True
+        self.clock = pygame.time.Clock() # Create a clock object.
+        self.running = True # Create a variable to track if the game is running.
 
-        if touchingDiamonds: 
-            ""
+        self.player = Player(C.screen["width"] / 2, C.screen["height"] / 2, 0.5)
 
-        self.blitDiamonds(canvas)
+        self.gameCanvas = pygame.Surface((C.canvas["width"],C.canvas["height"]))
+        self.backgroundImg = pygame.image.load("src/images/map/grass.png")
 
-    # def blitDiamonds(self, canvas):
-    #     if len(self.diamonds.allDiamonds) < 5:
-    #         self.diamonds.generateDiamonds(canvas, 5)
+    def initializeNewFrame(self):
+        self.gameCanvas.blit(self.backgroundImg, (0,0))
 
-    #     self.diamonds.blitAll(canvas)
+    def loadFrame(self):
+        # frameScaled = 
+        self.screen.blit(pygame.transform.scale(self.gameCanvas,(C.screen["width"], C.screen["height"])), (0,0))
 
-    # def isPlayerTouchingDiamonds(self, canvas):
-    #     ""
-    #     self.blitDiamonds(canvas)
+        pygame.display.flip() # Flip to next frame
+        self.clock.tick(60) # Wait for 1/60th of a second.
+
+    def updateFrame(self):
+        self.initializeNewFrame()
+
+        self.player.movingHandler()
+        self.player.render(self.gameCanvas)
+
+    def stop(self):
+        self.running = False
